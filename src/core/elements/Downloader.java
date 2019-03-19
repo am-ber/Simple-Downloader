@@ -1,13 +1,12 @@
 package core.elements;
 
 import java.io.PrintWriter;
-
 import tools.SyncPipe;
 
 public class Downloader {
 
 	public void Download(String url, String location) {
-		String[] command = { "cmd", };
+		String[] command = {"cmd", };
 		Process p;
 		try {
 			p = Runtime.getRuntime().exec(command);

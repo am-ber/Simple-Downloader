@@ -1,73 +1,136 @@
 package core.elements;
 
-import core.SimpleDownloaderLauncher;
+import java.io.File;
+import java.util.ArrayList;
+
+import core.DownloaderThread;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.Stage;
+import tools.CP;
 
 public class DownloaderUI extends GridPane {
 	
-	private SimpleDownloaderLauncher launcher;
-	private Downloader downloader;
-	
 	private TextField searchField;
 	private TextField locationField;
+	private Button changeLocationButton;
 	private Button downloadButton;
 	private Label title;
 	private Label linkLabel;
 	private Label locationLabel;
 	
-	public DownloaderUI(SimpleDownloaderLauncher launcher, Downloader downloader) {
-		this.launcher = launcher;
-		this.downloader = downloader;
+	private Stage primary;
+	private GridPane contentPane;
+	@SuppressWarnings("rawtypes")
+	private TableView downloadTable;
+	private ArrayList<DownloaderThread> threadList;
+	
+	public DownloaderUI(Stage primary) {
+		this.primary = primary;
+		threadList = new ArrayList<DownloaderThread>();
+		contentPane = new GridPane();
 		
-		setPadding(new Insets(10, 10, 10, 10));
-		setVgap(5);
-		setHgap(5);
+		contentPane.setPadding(new Insets(10, 10, 10, 10));
+		contentPane.setVgap(5);
+		contentPane.setHgap(5);
 		
 		initNodes();
+		add(contentPane, 0, 0);
 	}
 	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void initNodes() {
 		title = new Label("Simple Downloader");
 		title.setStyle("-fx-font-size: 15pt;");
-		add(title, 0, 0);
+		contentPane.add(title, 0, 0);
 		
 		linkLabel = new Label("YouTube Link:");
-		add(linkLabel, 0, 1);
+		contentPane.add(linkLabel, 0, 1);
 		
 		locationLabel = new Label("Save Location:");
-		add(locationLabel, 0, 3);
+		contentPane.add(locationLabel, 0, 3);
+		
+		changeLocationButton = new Button("Change Location");
+		changeLocationButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent arg0) {
+				DirectoryChooser chooser = new DirectoryChooser();
+				chooser.setTitle("JavaFX Projects");
+				File defaultDirectory = new File("c:/");
+				chooser.setInitialDirectory(defaultDirectory);
+				File selectedDirectory = chooser.showDialog(primary);
+				locationField.setText(selectedDirectory.getAbsolutePath());
+			}
+		});
+		contentPane.add(changeLocationButton, 1, 1);
 		
 		downloadButton = new Button("Download");
 		downloadButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent arg0) {
-				downloader.Download(searchField.getText(), locationField.getText());
+				if (searchField.getText().equals(""))
+					CP.println("Search field is empty");
+				else
+					threadList.add(new DownloaderThread(new GUIStruct(searchField.getText(), locationField.getText())));
+				clearFields();
 			}
 		});
-		add(downloadButton, 1, 3);
+		add(downloadButton, 0, 1);
 		
-		searchField = new TextField();
+		searchField = new TextField("https://www.youtube.com/watch?v=dppE0xtHzWU");
 		searchField.setOnKeyPressed(new EventHandler<KeyEvent>() {
 			@Override
 			public void handle(KeyEvent t) {
 				if (t.getCode() == KeyCode.ENTER) {
-					downloader.Download(searchField.getText(), locationField.getText());
+					if (searchField.getText().equals(""))
+						CP.println("Search field is empty");
+					else
+						threadList.add(new DownloaderThread(new GUIStruct(searchField.getText(), locationField.getText())));
+					clearFields();
 				}
 			}
 		});
 		searchField.setPrefColumnCount(24);
-		add(searchField, 0, 2);
+		contentPane.add(searchField, 0, 2);
 		
-		locationField = new TextField();
+		locationField = new TextField("c:\\");
 		locationField.setPrefColumnCount(24);
-		add(locationField, 0, 4);
+		contentPane.add(locationField, 0, 4);
+		
+		downloadTable = new TableView();
+		downloadTable.setEditable(false);
+		TableColumn jobColumn = new TableColumn("Job");
+		TableColumn statusColumn = new TableColumn("Status");
+		downloadTable.getColumns().addAll(jobColumn, statusColumn);
+		add(downloadTable, 0, 2);
+	}
+	
+	@SuppressWarnings("static-access")
+	public void checkJobList() {
+		for (DownloaderThread dT : threadList) {
+			// Will check if the thread has started
+			if (dT.isAlive()) {
+				if (dT.interrupted()) {
+					threadList.remove(dT);
+					return;
+				}
+			} else {
+				dT.run();
+			}
+		}
+	}
+	
+	public void clearFields() {
+		searchField.setText("");
 	}
 }

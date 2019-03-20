@@ -81,4 +81,10 @@ public class SimpleDownloaderLauncher extends Application {
 			CP.println("Even though the copying file didn't work, it can still run.\nThis will be fixed later.");
 		}
 	}
+	
+	public void stop() {
+		downloaderUI.dlUIThread.interrupt();
+		if (downloaderUI.dlUIThread.isInterrupted())
+			CP.println("Thread closed safely.");
+	}
 }

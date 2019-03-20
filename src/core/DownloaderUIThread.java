@@ -1,13 +1,20 @@
 package core;
 
+import core.elements.DownloaderUI;
 import tools.CP;
 
 public class DownloaderUIThread extends Thread {
 	
+	private DownloaderUI dUI;
+	
+	public DownloaderUIThread(DownloaderUI dUI) {
+		this.dUI = dUI;
+	}
+	
 	public void run() {
 		while (!Thread.currentThread().isInterrupted()) {
 			try {
-				
+				dUI.checkJobList();
 				// Waits 1 seconds to update
 				Thread.sleep(1000);
 				

@@ -13,7 +13,8 @@ public class Downloader {
 			new Thread(new SyncPipe(p.getErrorStream(), System.err)).start();
 			new Thread(new SyncPipe(p.getInputStream(), System.out)).start();
 			PrintWriter stdin = new PrintWriter(p.getOutputStream());
-			stdin.println("cd \"lib\"");
+			stdin.println("c:");
+			stdin.println("cd \"\\sd\"");
 			stdin.println("youtube-dl " + url);
 			stdin.close();
 			p.waitFor();

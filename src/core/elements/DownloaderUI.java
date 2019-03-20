@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 
 import core.DownloaderThread;
+import core.DownloaderUIThread;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -29,16 +30,22 @@ public class DownloaderUI extends GridPane {
 	private Label linkLabel;
 	private Label locationLabel;
 	
+	public DownloaderUIThread dlUIThread;
 	private Stage primary;
 	private GridPane contentPane;
 	@SuppressWarnings("rawtypes")
 	private TableView downloadTable;
+	@SuppressWarnings("rawtypes")
+	private TableColumn jobColumn;
+	@SuppressWarnings("rawtypes")
+	private TableColumn statusColumn;
 	private ArrayList<DownloaderThread> threadList;
 	
 	public DownloaderUI(Stage primary) {
 		this.primary = primary;
 		threadList = new ArrayList<DownloaderThread>();
 		contentPane = new GridPane();
+		dlUIThread = new DownloaderUIThread(this);
 		
 		contentPane.setPadding(new Insets(10, 10, 10, 10));
 		contentPane.setVgap(5);
@@ -108,25 +115,35 @@ public class DownloaderUI extends GridPane {
 		contentPane.add(locationField, 0, 4);
 		
 		downloadTable = new TableView();
-		downloadTable.setEditable(false);
-		TableColumn jobColumn = new TableColumn("Job");
-		TableColumn statusColumn = new TableColumn("Status");
+		downloadTable.setEditable(true);
+		jobColumn = new TableColumn("Job");
+		statusColumn = new TableColumn("Status");
 		downloadTable.getColumns().addAll(jobColumn, statusColumn);
 		add(downloadTable, 0, 2);
+		
+		dlUIThread.start();
 	}
 	
-	@SuppressWarnings("static-access")
+	@SuppressWarnings({ "static-access", "unchecked" })
 	public void checkJobList() {
-		for (DownloaderThread dT : threadList) {
-			// Will check if the thread has started
-			if (dT.isAlive()) {
-				if (dT.interrupted()) {
-					threadList.remove(dT);
-					return;
+		if (!threadList.isEmpty()) {
+			for (DownloaderThread dT : threadList) {
+				// Will check if the thread has started
+				if (dT.started) {
+					if (dT.finished) {
+						dT.interrupt();
+						if (threadList.remove(dT)) {
+							CP.println("Removed job: " + dT.getId());
+							return;
+						}
+					}
+				} else {
+					dT.run();
 				}
-			} else {
-				dT.run();
 			}
+			
+		} else {
+			CP.println("No jobs to run...");
 		}
 	}
 	

@@ -5,6 +5,8 @@ import java.util.ArrayList;
 
 import core.DownloaderThread;
 import core.DownloaderUIThread;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -13,6 +15,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
@@ -22,24 +25,35 @@ import tools.CP;
 
 public class DownloaderUI extends GridPane {
 	
+	// Textfields
 	private TextField searchField;
 	private TextField locationField;
+	
+	// Buttons
 	private Button changeLocationButton;
 	private Button downloadButton;
+	
+	// Labels
 	private Label title;
 	private Label linkLabel;
 	private Label locationLabel;
 	
+	// Thread handling
 	public DownloaderUIThread dlUIThread;
+	public ArrayList<DownloaderThread> threadList;
+	private int jobCount = 0;
+	
+	// Stages and layouts
 	private Stage primary;
 	private GridPane contentPane;
-	@SuppressWarnings("rawtypes")
-	private TableView downloadTable;
+	
+	// Table related
+	private TableView<GUIStruct> downloadTable;
 	@SuppressWarnings("rawtypes")
 	private TableColumn jobColumn;
 	@SuppressWarnings("rawtypes")
 	private TableColumn statusColumn;
-	private ArrayList<DownloaderThread> threadList;
+	private ObservableList<GUIStruct> downloadList;
 	
 	public DownloaderUI(Stage primary) {
 		this.primary = primary;
@@ -88,12 +102,13 @@ public class DownloaderUI extends GridPane {
 				if (searchField.getText().equals(""))
 					CP.println("Search field is empty");
 				else
-					threadList.add(new DownloaderThread(new GUIStruct(searchField.getText(), locationField.getText())));
+					addJob();
 				clearFields();
 			}
 		});
 		add(downloadButton, 0, 1);
 		
+		// Default video "Bustin every other beat"
 		searchField = new TextField("https://www.youtube.com/watch?v=dppE0xtHzWU");
 		searchField.setOnKeyPressed(new EventHandler<KeyEvent>() {
 			@Override
@@ -102,7 +117,7 @@ public class DownloaderUI extends GridPane {
 					if (searchField.getText().equals(""))
 						CP.println("Search field is empty");
 					else
-						threadList.add(new DownloaderThread(new GUIStruct(searchField.getText(), locationField.getText())));
+						addJob();
 					clearFields();
 				}
 			}
@@ -114,26 +129,34 @@ public class DownloaderUI extends GridPane {
 		locationField.setPrefColumnCount(24);
 		contentPane.add(locationField, 0, 4);
 		
-		downloadTable = new TableView();
+		downloadList = FXCollections.observableArrayList();
+		downloadTable = new TableView<GUIStruct>();
 		downloadTable.setEditable(true);
+		
 		jobColumn = new TableColumn("Job");
+		jobColumn.setMinWidth(50);
+		jobColumn.setCellValueFactory(new PropertyValueFactory<>("jobID"));
 		statusColumn = new TableColumn("Status");
+		statusColumn.setMinWidth(100);
+		statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
+		
 		downloadTable.getColumns().addAll(jobColumn, statusColumn);
+		downloadTable.setItems(downloadList);
 		add(downloadTable, 0, 2);
 		
 		dlUIThread.start();
 	}
 	
-	@SuppressWarnings({ "static-access", "unchecked" })
 	public void checkJobList() {
 		if (!threadList.isEmpty()) {
+			downloadTable.refresh();
 			for (DownloaderThread dT : threadList) {
 				// Will check if the thread has started
 				if (dT.started) {
 					if (dT.finished) {
 						dT.interrupt();
 						if (threadList.remove(dT)) {
-							CP.println("Removed job: " + dT.getId());
+							CP.println("Removed thread: " + dT.getId());
 							return;
 						}
 					}
@@ -145,6 +168,13 @@ public class DownloaderUI extends GridPane {
 		} else {
 			CP.println("No jobs to run...");
 		}
+	}
+	
+	public void addJob() {
+		jobCount ++;
+		DownloaderThread dT = new DownloaderThread(new GUIStruct(searchField.getText(), locationField.getText(), "" + jobCount, "waiting"));
+		downloadList.add(dT.struct);
+		threadList.add(dT);
 	}
 	
 	public void clearFields() {

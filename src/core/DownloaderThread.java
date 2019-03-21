@@ -18,8 +18,10 @@ public class DownloaderThread extends Thread {
 	
 	public void run() {
 		started = true;
+		struct.setStatus("Downloading...");
 		downloader.Download(struct.getUrl(), struct.getLocation());
-		CP.println("Downloader finished for: " + this.getId());
+		struct.setStatus("Done");
+		CP.println("Downloader finished for: " + struct.getJobID());
 		finished = true;
 	}
 }

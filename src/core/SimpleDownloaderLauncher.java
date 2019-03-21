@@ -3,7 +3,6 @@ package core;
 import java.io.File;
 import java.net.URL;
 
-import core.elements.Downloader;
 import core.elements.DownloaderUI;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -84,7 +83,14 @@ public class SimpleDownloaderLauncher extends Application {
 	
 	public void stop() {
 		downloaderUI.dlUIThread.interrupt();
+		if (downloaderUI.threadList.isEmpty()) {
+			for (DownloaderThread t : downloaderUI.threadList) {
+				t.interrupt();
+				if (t.isInterrupted())
+					CP.println("Downloader Thread: " + t.struct.getJobID() + " closed safely.");
+			}
+		}
 		if (downloaderUI.dlUIThread.isInterrupted())
-			CP.println("Thread closed safely.");
+			CP.println("DownloaderUI Thread closed safely.");
 	}
 }

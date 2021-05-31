@@ -1,0 +1,5 @@
+https://flatuicolors.com/palette/us
+text (city lights) - #dfe6e9 - rgb(223, 230, 233)
+lightback (soothing breeze) - #b2bec3 - rgb(178, 190, 195)
+mediumback (american river) - #636e72 - rgb(99, 110, 114)
+darkback (dracula orchid) - #2d3436 - rgb(45, 52, 54)

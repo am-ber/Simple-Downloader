@@ -42,11 +42,16 @@ namespace Video_Downloader
 			{
 				YouTube youTube = YouTube.Default;
 				YouTubeVideo video = youTube.GetVideo(link);
-				File.WriteAllBytes(@"C:\" + video.FullName, video.GetBytes());
+				File.WriteAllBytes(KnownFolders.GetPath(KnownFolder.Downloads) + video.FullName, video.GetBytes());
 			}
 			catch (ArgumentException ae)
 			{
-				Log($"\tError, link not correct or couldn't find the video location.\n\t{ae.Message}", true, gem);
+				Log($"\tLink not correct or couldn't find the video location.\n\t{ae.Message}", true, gem);
+			}
+			catch (UnauthorizedAccessException uae)
+			{
+				Log($"\tCan't put file in that directory, hopefully you're ok with the default location.\n\t{uae.Message}", true, gem);
+
 			}
 		}
 

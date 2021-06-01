@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
+using Newtonsoft.Json;
+using VideoLibrary;
 
 namespace Video_Downloader
 {
@@ -15,15 +18,14 @@ namespace Video_Downloader
 	{
 		private Button activeNavButton;
 		private Settings settings;
-		#region FormStuff
+		private TabPage previousPage;
+		#region FormInitializing
 		public const int WM_NCLBUTTONDOWN = 0xA1;
 		public const int HT_CAPTION = 0x2;
-
 		[System.Runtime.InteropServices.DllImport("user32.dll")]
 		public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
 		[System.Runtime.InteropServices.DllImport("user32.dll")]
 		public static extern bool ReleaseCapture();
-
 		[DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
 		private static extern IntPtr CreateRoundRectRgn(
 			int nLeftRect, int nTopRect,
@@ -40,35 +42,13 @@ namespace Video_Downloader
 		{
 			ContentPanelHandler(downloadTab);
 			NavButtonActive(downloadButton);
-		}
-		private void MainForm_MouseDown(object sender, MouseEventArgs e)
-		{
-			if (e.Button == MouseButtons.Left)
-			{
-				ReleaseCapture();
-				SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
-			}
-		}
 
-		private void closeAppButton_Click(object sender, EventArgs e)
-		{
-			Close();
-		}
-		private void minimizeButton_Click(object sender, EventArgs e)
-		{
-			WindowState = FormWindowState.Minimized;
+			downloadLocationTextBox.Text = settings.DownloadLocation;
+			loggingCheckBox.Checked = settings.LogThings;
 		}
 		#endregion
-		private void Button_Click(object sender, EventArgs e)
-		{
-			Program.Log($"\t{sender} Button pressed");
-			if (sender.GetType().IsEquivalentTo(typeof(Button)))
-			{
-				Button btn = sender as Button;
-				NavButtonActive(btn);
-			}
-		}
 
+		#region ButtonRegion
 		private void NavButtonActive(Button btn)
 		{
 			if (activeNavButton != null)
@@ -81,12 +61,107 @@ namespace Video_Downloader
 			activeNavButton = btn;
 			PanelDecider(btn);
 		}
-
 		private void NavButtonDeactivate(Button btn)
 		{
 			btn.BackColor = Color.Transparent;
 		}
+		private void Button_Click(object sender, EventArgs e)
+		{
+			Program.Log($"\t{sender} Button pressed");
+			if (sender.GetType().IsEquivalentTo(typeof(Button)))
+			{
+				Button btn = sender as Button;
+				NavButtonActive(btn);
+			}
+		}
+		private void linkButton_Click(object sender, EventArgs e)
+		{
+			try
+			{
+				YouTube youTube = YouTube.Default;
+				IEnumerable<YouTubeVideo> video = youTube.GetAllVideos(linkTextBox.Text);
+				AddNewDownloadJob(video);
+			}
+			catch (ArgumentException ae)
+			{
+				Program.Log($"\tLink not correct or couldn't find the video location.\n\t{ae.Message}", true, DisplayError);
+			}
+			catch (UnauthorizedAccessException uae)
+			{
+				Program.Log("\tCan't put file in that directory." +
+				            "Hopefully you're ok with the default location.\n" +
+				            $"\t{uae.Message}", true, DisplayError);
+			}
+		}
+		private void errorCloseButton_Click(object sender, EventArgs e)
+		{
+			contentTabController.SelectedTab = previousPage;
+		}
+		private void downloadLocation_Click(object sender, EventArgs e)
+		{
+			using (FolderBrowserDialog folderDialog = new FolderBrowserDialog())
+			{
+				DialogResult result = folderDialog.ShowDialog();
 
+				if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(folderDialog.SelectedPath))
+				{
+					downloadLocationTextBox.Text = folderDialog.SelectedPath;
+					settings.DownloadLocation = folderDialog.SelectedPath;
+					UpdateSettings();
+				}
+			}
+		}
+		private void MainForm_MouseDown(object sender, MouseEventArgs e)
+		{
+			if (e.Button == MouseButtons.Left)
+			{
+				ReleaseCapture();
+				SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
+			}
+		}
+		private void closeAppButton_Click(object sender, EventArgs e)
+		{
+			Close();
+		}
+		private void minimizeButton_Click(object sender, EventArgs e)
+		{
+			WindowState = FormWindowState.Minimized;
+		}
+		#endregion
+		private void downloadLocationTextBox_KeyDown(object sender, KeyEventArgs e)
+		{
+			if (e.KeyCode == Keys.Enter)
+			{
+				bool incorrect = Directory.Exists(downloadLocationTextBox.Text);
+				if (!incorrect)
+				{
+					try
+					{
+						Directory.CreateDirectory(downloadLocationTextBox.Text);
+						settings.DownloadLocation = downloadLocationTextBox.Text;
+						incorrect = true;
+					}
+					catch (Exception em)
+					{
+						Program.Log($"\tSomething is wrong with this file location...\t\n{em.Message}",
+							true, (string err) => DisplayError(err));
+					}
+				}
+				if (incorrect)
+				{
+					UpdateSettings();
+				}
+			}
+		}
+		private void loggingCheckBox_CheckStateChanged(object sender, EventArgs e)
+		{
+			settings.LogThings = loggingCheckBox.Checked;
+			UpdateSettings();
+		}
+		private void UpdateSettings()
+		{
+			File.WriteAllText("config.json", JsonConvert.SerializeObject(settings));
+		}
 		private void PanelDecider(Button activator)
 		{
 			if (activator.Equals(downloadButton))
@@ -111,13 +186,18 @@ namespace Video_Downloader
 			);
 			contentTabController.SelectTab(page);
 		}
-
-		private void linkButton_Click(object sender, EventArgs e)
+		private void DisplayError(string message)
 		{
-			Program.SaveVideoToDisk(linkTextBox.Text, settings.DownloadLocation,(err) => DisplayError(err));
+			previousPage = contentTabController.SelectedTab;
+			errorBodyLabel.Text = message;
+			ContentPanelHandler(errorTab);
 		}
 
-		private void DisplayError(string message)
+		private void AddNewDownloadJob(IEnumerable<YouTubeVideo> video)
+		{
+			
+		}
+		private void AddDownloadRow(DownloadAgent agent)
 		{
 
 		}

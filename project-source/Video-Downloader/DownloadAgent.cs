@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -40,7 +41,7 @@ namespace Video_Downloader
 		{
 			try
 			{
-
+				File.WriteAllBytes(string.Concat(settings.DownloadLocation, @"\", video.FullName), video.GetBytes());
 			}
 			catch (Exception e)
 			{

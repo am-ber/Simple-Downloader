@@ -78,7 +78,6 @@ namespace Video_Downloader
 			catch (UnauthorizedAccessException uae)
 			{
 				Log($"\tCan't put file in that directory, hopefully you're ok with the default location.\n\t{uae.Message}", true, gem);
-
 			}
 		}
 

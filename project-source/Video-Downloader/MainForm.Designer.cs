@@ -33,11 +33,26 @@ namespace Video_Downloader
 			this.contentTabController = new System.Windows.Forms.TabControl();
 			this.downloadTab = new System.Windows.Forms.TabPage();
 			this.downloadPanel = new System.Windows.Forms.Panel();
+			this.jobTable = new System.Windows.Forms.TableLayoutPanel();
+			this.tableJobProgressLabel = new System.Windows.Forms.Label();
+			this.tableJobPercentLabel = new System.Windows.Forms.Label();
+			this.tableJobTitleLabel = new System.Windows.Forms.Label();
 			this.searchPanel = new System.Windows.Forms.Panel();
 			this.linkButton = new System.Windows.Forms.Button();
 			this.linkTextBox = new System.Windows.Forms.TextBox();
 			this.settingsTab = new System.Windows.Forms.TabPage();
 			this.settingsPanel = new System.Windows.Forms.Panel();
+			this.logSettingsPanel = new System.Windows.Forms.Panel();
+			this.loggingCheckBox = new System.Windows.Forms.CheckBox();
+			this.downloadLocationPanel = new System.Windows.Forms.Panel();
+			this.downloadLocation = new System.Windows.Forms.Button();
+			this.downloadLocationTextBox = new System.Windows.Forms.TextBox();
+			this.errorTab = new System.Windows.Forms.TabPage();
+			this.errorContentPanel = new System.Windows.Forms.Panel();
+			this.errorBodyLabel = new System.Windows.Forms.Label();
+			this.errorTitlePanel = new System.Windows.Forms.Panel();
+			this.errorTitle = new System.Windows.Forms.Label();
+			this.errorCloseButton = new System.Windows.Forms.Button();
 			this.leftMenuPanel = new System.Windows.Forms.Panel();
 			this.buttonContainer = new System.Windows.Forms.Panel();
 			this.panelNav = new System.Windows.Forms.Panel();
@@ -53,8 +68,15 @@ namespace Video_Downloader
 			this.contentTabController.SuspendLayout();
 			this.downloadTab.SuspendLayout();
 			this.downloadPanel.SuspendLayout();
+			this.jobTable.SuspendLayout();
 			this.searchPanel.SuspendLayout();
 			this.settingsTab.SuspendLayout();
+			this.settingsPanel.SuspendLayout();
+			this.logSettingsPanel.SuspendLayout();
+			this.downloadLocationPanel.SuspendLayout();
+			this.errorTab.SuspendLayout();
+			this.errorContentPanel.SuspendLayout();
+			this.errorTitlePanel.SuspendLayout();
 			this.leftMenuPanel.SuspendLayout();
 			this.buttonContainer.SuspendLayout();
 			this.iconTitlePanel.SuspendLayout();
@@ -69,6 +91,7 @@ namespace Video_Downloader
 			this.contentTabController.Appearance = System.Windows.Forms.TabAppearance.FlatButtons;
 			this.contentTabController.Controls.Add(this.downloadTab);
 			this.contentTabController.Controls.Add(this.settingsTab);
+			this.contentTabController.Controls.Add(this.errorTab);
 			this.contentTabController.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.contentTabController.Font = new System.Drawing.Font("Segoe UI", 1.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
 			this.contentTabController.ItemSize = new System.Drawing.Size(0, 1);
@@ -97,6 +120,7 @@ namespace Video_Downloader
 			// downloadPanel
 			// 
 			this.downloadPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(99)))), ((int)(((byte)(110)))), ((int)(((byte)(114)))));
+			this.downloadPanel.Controls.Add(this.jobTable);
 			this.downloadPanel.Controls.Add(this.searchPanel);
 			this.downloadPanel.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.downloadPanel.Location = new System.Drawing.Point(10, 10);
@@ -104,15 +128,82 @@ namespace Video_Downloader
 			this.downloadPanel.Size = new System.Drawing.Size(622, 533);
 			this.downloadPanel.TabIndex = 0;
 			// 
+			// jobTable
+			// 
+			this.jobTable.AutoScroll = true;
+			this.jobTable.BackColor = System.Drawing.Color.Transparent;
+			this.jobTable.ColumnCount = 3;
+			this.jobTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 400F));
+			this.jobTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
+			this.jobTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 142F));
+			this.jobTable.Controls.Add(this.tableJobProgressLabel, 2, 0);
+			this.jobTable.Controls.Add(this.tableJobPercentLabel, 1, 0);
+			this.jobTable.Controls.Add(this.tableJobTitleLabel, 0, 0);
+			this.jobTable.Dock = System.Windows.Forms.DockStyle.Top;
+			this.jobTable.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+			this.jobTable.Location = new System.Drawing.Point(0, 27);
+			this.jobTable.Margin = new System.Windows.Forms.Padding(0);
+			this.jobTable.MaximumSize = new System.Drawing.Size(622, 500);
+			this.jobTable.MinimumSize = new System.Drawing.Size(622, 32);
+			this.jobTable.Name = "jobTable";
+			this.jobTable.RowCount = 1;
+			this.jobTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
+			this.jobTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
+			this.jobTable.Size = new System.Drawing.Size(622, 32);
+			this.jobTable.TabIndex = 2;
+			// 
+			// tableJobProgressLabel
+			// 
+			this.tableJobProgressLabel.AutoSize = true;
+			this.tableJobProgressLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(52)))), ((int)(((byte)(54)))));
+			this.tableJobProgressLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.tableJobProgressLabel.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+			this.tableJobProgressLabel.Location = new System.Drawing.Point(480, 0);
+			this.tableJobProgressLabel.Margin = new System.Windows.Forms.Padding(0);
+			this.tableJobProgressLabel.Name = "tableJobProgressLabel";
+			this.tableJobProgressLabel.Size = new System.Drawing.Size(142, 32);
+			this.tableJobProgressLabel.TabIndex = 2;
+			this.tableJobProgressLabel.Text = "Progress";
+			this.tableJobProgressLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// tableJobPercentLabel
+			// 
+			this.tableJobPercentLabel.AutoSize = true;
+			this.tableJobPercentLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(52)))), ((int)(((byte)(54)))));
+			this.tableJobPercentLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.tableJobPercentLabel.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+			this.tableJobPercentLabel.Location = new System.Drawing.Point(400, 0);
+			this.tableJobPercentLabel.Margin = new System.Windows.Forms.Padding(0);
+			this.tableJobPercentLabel.Name = "tableJobPercentLabel";
+			this.tableJobPercentLabel.Size = new System.Drawing.Size(80, 32);
+			this.tableJobPercentLabel.TabIndex = 1;
+			this.tableJobPercentLabel.Text = "Percent";
+			this.tableJobPercentLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// tableJobTitleLabel
+			// 
+			this.tableJobTitleLabel.AutoSize = true;
+			this.tableJobTitleLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(52)))), ((int)(((byte)(54)))));
+			this.tableJobTitleLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.tableJobTitleLabel.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+			this.tableJobTitleLabel.Location = new System.Drawing.Point(0, 0);
+			this.tableJobTitleLabel.Margin = new System.Windows.Forms.Padding(0);
+			this.tableJobTitleLabel.Name = "tableJobTitleLabel";
+			this.tableJobTitleLabel.Size = new System.Drawing.Size(400, 32);
+			this.tableJobTitleLabel.TabIndex = 0;
+			this.tableJobTitleLabel.Text = "Video Title";
+			this.tableJobTitleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
 			// searchPanel
 			// 
 			this.searchPanel.Controls.Add(this.linkButton);
 			this.searchPanel.Controls.Add(this.linkTextBox);
 			this.searchPanel.Dock = System.Windows.Forms.DockStyle.Top;
 			this.searchPanel.Location = new System.Drawing.Point(0, 0);
+			this.searchPanel.Margin = new System.Windows.Forms.Padding(0);
 			this.searchPanel.MinimumSize = new System.Drawing.Size(0, 24);
 			this.searchPanel.Name = "searchPanel";
-			this.searchPanel.Size = new System.Drawing.Size(622, 24);
+			this.searchPanel.Size = new System.Drawing.Size(622, 27);
 			this.searchPanel.TabIndex = 1;
 			// 
 			// linkButton
@@ -125,7 +216,7 @@ namespace Video_Downloader
 			this.linkButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(230)))), ((int)(((byte)(233)))));
 			this.linkButton.Location = new System.Drawing.Point(547, 0);
 			this.linkButton.Name = "linkButton";
-			this.linkButton.Size = new System.Drawing.Size(75, 24);
+			this.linkButton.Size = new System.Drawing.Size(75, 27);
 			this.linkButton.TabIndex = 1;
 			this.linkButton.Text = "Download";
 			this.linkButton.UseVisualStyleBackColor = false;
@@ -133,15 +224,17 @@ namespace Video_Downloader
 			// 
 			// linkTextBox
 			// 
-			this.linkTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(230)))), ((int)(((byte)(233)))));
+			this.linkTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(190)))), ((int)(((byte)(195)))));
+			this.linkTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.linkTextBox.Dock = System.Windows.Forms.DockStyle.Left;
-			this.linkTextBox.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+			this.linkTextBox.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
 			this.linkTextBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(52)))), ((int)(((byte)(54)))));
 			this.linkTextBox.Location = new System.Drawing.Point(0, 0);
 			this.linkTextBox.MinimumSize = new System.Drawing.Size(529, 24);
 			this.linkTextBox.Name = "linkTextBox";
-			this.linkTextBox.Size = new System.Drawing.Size(529, 25);
+			this.linkTextBox.Size = new System.Drawing.Size(529, 26);
 			this.linkTextBox.TabIndex = 0;
+			this.linkTextBox.Text = "https://youtu.be/dQw4w9WgXcQ";
 			// 
 			// settingsTab
 			// 
@@ -157,12 +250,152 @@ namespace Video_Downloader
 			// settingsPanel
 			// 
 			this.settingsPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(99)))), ((int)(((byte)(110)))), ((int)(((byte)(114)))));
+			this.settingsPanel.Controls.Add(this.logSettingsPanel);
+			this.settingsPanel.Controls.Add(this.downloadLocationPanel);
 			this.settingsPanel.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.settingsPanel.Location = new System.Drawing.Point(3, 3);
 			this.settingsPanel.Name = "settingsPanel";
+			this.settingsPanel.Padding = new System.Windows.Forms.Padding(10);
 			this.settingsPanel.Size = new System.Drawing.Size(636, 547);
 			this.settingsPanel.TabIndex = 1;
-			this.settingsPanel.Visible = false;
+			// 
+			// logSettingsPanel
+			// 
+			this.logSettingsPanel.Controls.Add(this.loggingCheckBox);
+			this.logSettingsPanel.Location = new System.Drawing.Point(10, 54);
+			this.logSettingsPanel.Name = "logSettingsPanel";
+			this.logSettingsPanel.Padding = new System.Windows.Forms.Padding(10);
+			this.logSettingsPanel.Size = new System.Drawing.Size(616, 43);
+			this.logSettingsPanel.TabIndex = 2;
+			// 
+			// loggingCheckBox
+			// 
+			this.loggingCheckBox.AutoSize = true;
+			this.loggingCheckBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(190)))), ((int)(((byte)(195)))));
+			this.loggingCheckBox.Dock = System.Windows.Forms.DockStyle.Left;
+			this.loggingCheckBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.loggingCheckBox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+			this.loggingCheckBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(52)))), ((int)(((byte)(54)))));
+			this.loggingCheckBox.Location = new System.Drawing.Point(10, 10);
+			this.loggingCheckBox.Name = "loggingCheckBox";
+			this.loggingCheckBox.Size = new System.Drawing.Size(118, 23);
+			this.loggingCheckBox.TabIndex = 1;
+			this.loggingCheckBox.Text = "Keep Log Files";
+			this.loggingCheckBox.UseVisualStyleBackColor = false;
+			this.loggingCheckBox.CheckStateChanged += new System.EventHandler(this.loggingCheckBox_CheckStateChanged);
+			// 
+			// downloadLocationPanel
+			// 
+			this.downloadLocationPanel.Controls.Add(this.downloadLocation);
+			this.downloadLocationPanel.Controls.Add(this.downloadLocationTextBox);
+			this.downloadLocationPanel.Dock = System.Windows.Forms.DockStyle.Top;
+			this.downloadLocationPanel.Location = new System.Drawing.Point(10, 10);
+			this.downloadLocationPanel.Name = "downloadLocationPanel";
+			this.downloadLocationPanel.Size = new System.Drawing.Size(616, 27);
+			this.downloadLocationPanel.TabIndex = 0;
+			// 
+			// downloadLocation
+			// 
+			this.downloadLocation.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(52)))), ((int)(((byte)(54)))));
+			this.downloadLocation.Dock = System.Windows.Forms.DockStyle.Right;
+			this.downloadLocation.FlatAppearance.BorderSize = 0;
+			this.downloadLocation.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.downloadLocation.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+			this.downloadLocation.Location = new System.Drawing.Point(485, 0);
+			this.downloadLocation.Margin = new System.Windows.Forms.Padding(0);
+			this.downloadLocation.Name = "downloadLocation";
+			this.downloadLocation.Size = new System.Drawing.Size(131, 27);
+			this.downloadLocation.TabIndex = 1;
+			this.downloadLocation.Text = "Change Location";
+			this.downloadLocation.UseVisualStyleBackColor = false;
+			this.downloadLocation.Click += new System.EventHandler(this.downloadLocation_Click);
+			// 
+			// downloadLocationTextBox
+			// 
+			this.downloadLocationTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(190)))), ((int)(((byte)(195)))));
+			this.downloadLocationTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			this.downloadLocationTextBox.Dock = System.Windows.Forms.DockStyle.Left;
+			this.downloadLocationTextBox.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+			this.downloadLocationTextBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(52)))), ((int)(((byte)(54)))));
+			this.downloadLocationTextBox.Location = new System.Drawing.Point(0, 0);
+			this.downloadLocationTextBox.Name = "downloadLocationTextBox";
+			this.downloadLocationTextBox.Size = new System.Drawing.Size(479, 26);
+			this.downloadLocationTextBox.TabIndex = 0;
+			this.downloadLocationTextBox.Text = "Download Location";
+			this.downloadLocationTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.downloadLocationTextBox_KeyDown);
+			// 
+			// errorTab
+			// 
+			this.errorTab.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(118)))), ((int)(((byte)(117)))));
+			this.errorTab.Controls.Add(this.errorContentPanel);
+			this.errorTab.Controls.Add(this.errorTitlePanel);
+			this.errorTab.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(52)))), ((int)(((byte)(54)))));
+			this.errorTab.Location = new System.Drawing.Point(4, 5);
+			this.errorTab.Name = "errorTab";
+			this.errorTab.Padding = new System.Windows.Forms.Padding(3);
+			this.errorTab.Size = new System.Drawing.Size(642, 553);
+			this.errorTab.TabIndex = 2;
+			this.errorTab.Text = "tabPage1";
+			// 
+			// errorContentPanel
+			// 
+			this.errorContentPanel.BackColor = System.Drawing.Color.Transparent;
+			this.errorContentPanel.Controls.Add(this.errorBodyLabel);
+			this.errorContentPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.errorContentPanel.Location = new System.Drawing.Point(3, 39);
+			this.errorContentPanel.Name = "errorContentPanel";
+			this.errorContentPanel.Padding = new System.Windows.Forms.Padding(20);
+			this.errorContentPanel.Size = new System.Drawing.Size(636, 511);
+			this.errorContentPanel.TabIndex = 3;
+			// 
+			// errorBodyLabel
+			// 
+			this.errorBodyLabel.AutoSize = true;
+			this.errorBodyLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.errorBodyLabel.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+			this.errorBodyLabel.Location = new System.Drawing.Point(20, 20);
+			this.errorBodyLabel.Name = "errorBodyLabel";
+			this.errorBodyLabel.Size = new System.Drawing.Size(376, 23);
+			this.errorBodyLabel.TabIndex = 0;
+			this.errorBodyLabel.Text = "This is an example of something bad happening.";
+			// 
+			// errorTitlePanel
+			// 
+			this.errorTitlePanel.BackColor = System.Drawing.Color.Transparent;
+			this.errorTitlePanel.Controls.Add(this.errorTitle);
+			this.errorTitlePanel.Controls.Add(this.errorCloseButton);
+			this.errorTitlePanel.Dock = System.Windows.Forms.DockStyle.Top;
+			this.errorTitlePanel.Location = new System.Drawing.Point(3, 3);
+			this.errorTitlePanel.Name = "errorTitlePanel";
+			this.errorTitlePanel.Size = new System.Drawing.Size(636, 36);
+			this.errorTitlePanel.TabIndex = 2;
+			// 
+			// errorTitle
+			// 
+			this.errorTitle.BackColor = System.Drawing.Color.Transparent;
+			this.errorTitle.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.errorTitle.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+			this.errorTitle.Location = new System.Drawing.Point(0, 0);
+			this.errorTitle.Name = "errorTitle";
+			this.errorTitle.Size = new System.Drawing.Size(591, 36);
+			this.errorTitle.TabIndex = 0;
+			this.errorTitle.Text = "Hey, something happened...";
+			this.errorTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			// 
+			// errorCloseButton
+			// 
+			this.errorCloseButton.Dock = System.Windows.Forms.DockStyle.Right;
+			this.errorCloseButton.FlatAppearance.BorderSize = 0;
+			this.errorCloseButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.errorCloseButton.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+			this.errorCloseButton.Location = new System.Drawing.Point(591, 0);
+			this.errorCloseButton.Margin = new System.Windows.Forms.Padding(0);
+			this.errorCloseButton.Name = "errorCloseButton";
+			this.errorCloseButton.Size = new System.Drawing.Size(45, 36);
+			this.errorCloseButton.TabIndex = 1;
+			this.errorCloseButton.Text = "X";
+			this.errorCloseButton.UseVisualStyleBackColor = true;
+			this.errorCloseButton.Click += new System.EventHandler(this.errorCloseButton_Click);
 			// 
 			// leftMenuPanel
 			// 
@@ -348,9 +581,20 @@ namespace Video_Downloader
 			this.contentTabController.ResumeLayout(false);
 			this.downloadTab.ResumeLayout(false);
 			this.downloadPanel.ResumeLayout(false);
+			this.jobTable.ResumeLayout(false);
+			this.jobTable.PerformLayout();
 			this.searchPanel.ResumeLayout(false);
 			this.searchPanel.PerformLayout();
 			this.settingsTab.ResumeLayout(false);
+			this.settingsPanel.ResumeLayout(false);
+			this.logSettingsPanel.ResumeLayout(false);
+			this.logSettingsPanel.PerformLayout();
+			this.downloadLocationPanel.ResumeLayout(false);
+			this.downloadLocationPanel.PerformLayout();
+			this.errorTab.ResumeLayout(false);
+			this.errorContentPanel.ResumeLayout(false);
+			this.errorContentPanel.PerformLayout();
+			this.errorTitlePanel.ResumeLayout(false);
 			this.leftMenuPanel.ResumeLayout(false);
 			this.leftMenuPanel.PerformLayout();
 			this.buttonContainer.ResumeLayout(false);
@@ -384,6 +628,21 @@ namespace Video_Downloader
 		private System.Windows.Forms.TabPage settingsTab;
 		private System.Windows.Forms.TabControl contentTabController;
 		private System.Windows.Forms.Button minimizeButton;
+		private System.Windows.Forms.TabPage errorTab;
+		private System.Windows.Forms.Label errorTitle;
+		private System.Windows.Forms.Panel errorTitlePanel;
+		private System.Windows.Forms.Button errorCloseButton;
+		private System.Windows.Forms.Panel errorContentPanel;
+		private System.Windows.Forms.Label errorBodyLabel;
+		private System.Windows.Forms.Panel downloadLocationPanel;
+		private System.Windows.Forms.TextBox downloadLocationTextBox;
+		private System.Windows.Forms.Button downloadLocation;
+		private System.Windows.Forms.Panel logSettingsPanel;
+		private System.Windows.Forms.CheckBox loggingCheckBox;
+		private System.Windows.Forms.TableLayoutPanel jobTable;
+		private System.Windows.Forms.Label tableJobProgressLabel;
+		private System.Windows.Forms.Label tableJobPercentLabel;
+		private System.Windows.Forms.Label tableJobTitleLabel;
 	}
 }
 

@@ -1,9 +1,0 @@
-Simple Downloader starting execution(05/31/2021 20:20:28)...
-	System.Windows.Forms.Button, Text: Settings Button pressed
-	System.Windows.Forms.Button, Text: Download Button pressed
-
-	---------------------ERROR-------------------------
-	Link not correct or couldn't find the video location.
-	URL is not a valid YouTube URL!
-	-----------------ENDOFERROR------------------------
-Ending Execution... (05/31/2021 20:20:45)

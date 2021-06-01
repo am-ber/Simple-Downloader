@@ -29,6 +29,14 @@ namespace Video_Downloader
 		/// </summary>
 		private void InitializeComponent()
 		{
+			System.Windows.Forms.TabControl contentTabController;
+			this.downloadTab = new System.Windows.Forms.TabPage();
+			this.downloadPanel = new System.Windows.Forms.Panel();
+			this.searchPanel = new System.Windows.Forms.Panel();
+			this.linkButton = new System.Windows.Forms.Button();
+			this.linkTextBox = new System.Windows.Forms.TextBox();
+			this.settingsTab = new System.Windows.Forms.TabPage();
+			this.settingsPanel = new System.Windows.Forms.Panel();
 			this.leftMenuPanel = new System.Windows.Forms.Panel();
 			this.buttonContainer = new System.Windows.Forms.Panel();
 			this.panelNav = new System.Windows.Forms.Panel();
@@ -40,20 +48,118 @@ namespace Video_Downloader
 			this.titlebarPanel = new System.Windows.Forms.Panel();
 			this.closeAppButton = new System.Windows.Forms.Button();
 			this.contentPanel = new System.Windows.Forms.Panel();
-			this.settingsPanel = new System.Windows.Forms.Panel();
-			this.downloadPanel = new System.Windows.Forms.Panel();
-			this.searchPanel = new System.Windows.Forms.Panel();
-			this.linkButton = new System.Windows.Forms.Button();
-			this.linkTextBox = new System.Windows.Forms.TextBox();
+			contentTabController = new System.Windows.Forms.TabControl();
+			contentTabController.SuspendLayout();
+			this.downloadTab.SuspendLayout();
+			this.downloadPanel.SuspendLayout();
+			this.searchPanel.SuspendLayout();
+			this.settingsTab.SuspendLayout();
 			this.leftMenuPanel.SuspendLayout();
 			this.buttonContainer.SuspendLayout();
 			this.iconTitlePanel.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.icon)).BeginInit();
 			this.titlebarPanel.SuspendLayout();
 			this.contentPanel.SuspendLayout();
-			this.downloadPanel.SuspendLayout();
-			this.searchPanel.SuspendLayout();
 			this.SuspendLayout();
+			// 
+			// contentTabController
+			// 
+			contentTabController.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
+			contentTabController.Appearance = System.Windows.Forms.TabAppearance.FlatButtons;
+			contentTabController.Controls.Add(this.downloadTab);
+			contentTabController.Controls.Add(this.settingsTab);
+			contentTabController.Dock = System.Windows.Forms.DockStyle.Fill;
+			contentTabController.Font = new System.Drawing.Font("Segoe UI", 1.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+			contentTabController.ItemSize = new System.Drawing.Size(1, 1);
+			contentTabController.Location = new System.Drawing.Point(0, 0);
+			contentTabController.Name = "contentTabController";
+			contentTabController.Padding = new System.Drawing.Point(0, 0);
+			contentTabController.SelectedIndex = 0;
+			contentTabController.Size = new System.Drawing.Size(650, 562);
+			contentTabController.TabIndex = 0;
+			contentTabController.TabStop = false;
+			// 
+			// downloadTab
+			// 
+			this.downloadTab.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(99)))), ((int)(((byte)(110)))), ((int)(((byte)(114)))));
+			this.downloadTab.Controls.Add(this.downloadPanel);
+			this.downloadTab.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(230)))), ((int)(((byte)(233)))));
+			this.downloadTab.Location = new System.Drawing.Point(4, 5);
+			this.downloadTab.Margin = new System.Windows.Forms.Padding(0);
+			this.downloadTab.Name = "downloadTab";
+			this.downloadTab.Padding = new System.Windows.Forms.Padding(10);
+			this.downloadTab.Size = new System.Drawing.Size(642, 553);
+			this.downloadTab.TabIndex = 0;
+			// 
+			// downloadPanel
+			// 
+			this.downloadPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(99)))), ((int)(((byte)(110)))), ((int)(((byte)(114)))));
+			this.downloadPanel.Controls.Add(this.searchPanel);
+			this.downloadPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.downloadPanel.Location = new System.Drawing.Point(10, 10);
+			this.downloadPanel.Name = "downloadPanel";
+			this.downloadPanel.Size = new System.Drawing.Size(622, 533);
+			this.downloadPanel.TabIndex = 0;
+			// 
+			// searchPanel
+			// 
+			this.searchPanel.Controls.Add(this.linkButton);
+			this.searchPanel.Controls.Add(this.linkTextBox);
+			this.searchPanel.Dock = System.Windows.Forms.DockStyle.Top;
+			this.searchPanel.Location = new System.Drawing.Point(0, 0);
+			this.searchPanel.MinimumSize = new System.Drawing.Size(0, 24);
+			this.searchPanel.Name = "searchPanel";
+			this.searchPanel.Size = new System.Drawing.Size(622, 24);
+			this.searchPanel.TabIndex = 1;
+			// 
+			// linkButton
+			// 
+			this.linkButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(52)))), ((int)(((byte)(54)))));
+			this.linkButton.Dock = System.Windows.Forms.DockStyle.Right;
+			this.linkButton.FlatAppearance.BorderSize = 0;
+			this.linkButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.linkButton.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+			this.linkButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(230)))), ((int)(((byte)(233)))));
+			this.linkButton.Location = new System.Drawing.Point(547, 0);
+			this.linkButton.Name = "linkButton";
+			this.linkButton.Size = new System.Drawing.Size(75, 24);
+			this.linkButton.TabIndex = 1;
+			this.linkButton.Text = "Download";
+			this.linkButton.UseVisualStyleBackColor = false;
+			this.linkButton.Click += new System.EventHandler(this.linkButton_Click);
+			// 
+			// linkTextBox
+			// 
+			this.linkTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(230)))), ((int)(((byte)(233)))));
+			this.linkTextBox.Dock = System.Windows.Forms.DockStyle.Left;
+			this.linkTextBox.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+			this.linkTextBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(52)))), ((int)(((byte)(54)))));
+			this.linkTextBox.Location = new System.Drawing.Point(0, 0);
+			this.linkTextBox.MinimumSize = new System.Drawing.Size(529, 24);
+			this.linkTextBox.Name = "linkTextBox";
+			this.linkTextBox.Size = new System.Drawing.Size(529, 25);
+			this.linkTextBox.TabIndex = 0;
+			// 
+			// settingsTab
+			// 
+			this.settingsTab.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(99)))), ((int)(((byte)(110)))), ((int)(((byte)(114)))));
+			this.settingsTab.Controls.Add(this.settingsPanel);
+			this.settingsTab.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(230)))), ((int)(((byte)(233)))));
+			this.settingsTab.Location = new System.Drawing.Point(4, 5);
+			this.settingsTab.Name = "settingsTab";
+			this.settingsTab.Padding = new System.Windows.Forms.Padding(3);
+			this.settingsTab.Size = new System.Drawing.Size(642, 553);
+			this.settingsTab.TabIndex = 1;
+			// 
+			// settingsPanel
+			// 
+			this.settingsPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(99)))), ((int)(((byte)(110)))), ((int)(((byte)(114)))));
+			this.settingsPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.settingsPanel.Location = new System.Drawing.Point(3, 3);
+			this.settingsPanel.Name = "settingsPanel";
+			this.settingsPanel.Size = new System.Drawing.Size(636, 547);
+			this.settingsPanel.TabIndex = 1;
+			this.settingsPanel.Visible = false;
 			// 
 			// leftMenuPanel
 			// 
@@ -197,72 +303,13 @@ namespace Video_Downloader
 			// contentPanel
 			// 
 			this.contentPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(99)))), ((int)(((byte)(110)))), ((int)(((byte)(114)))));
-			this.contentPanel.Controls.Add(this.settingsPanel);
-			this.contentPanel.Controls.Add(this.downloadPanel);
+			this.contentPanel.Controls.Add(contentTabController);
 			this.contentPanel.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.contentPanel.Location = new System.Drawing.Point(150, 38);
 			this.contentPanel.Margin = new System.Windows.Forms.Padding(20);
 			this.contentPanel.Name = "contentPanel";
-			this.contentPanel.Padding = new System.Windows.Forms.Padding(20);
 			this.contentPanel.Size = new System.Drawing.Size(650, 562);
 			this.contentPanel.TabIndex = 2;
-			// 
-			// settingsPanel
-			// 
-			this.settingsPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(99)))), ((int)(((byte)(110)))), ((int)(((byte)(114)))));
-			this.settingsPanel.Location = new System.Drawing.Point(509, 548);
-			this.settingsPanel.Name = "settingsPanel";
-			this.settingsPanel.Size = new System.Drawing.Size(309, 161);
-			this.settingsPanel.TabIndex = 1;
-			this.settingsPanel.Visible = false;
-			// 
-			// downloadPanel
-			// 
-			this.downloadPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(99)))), ((int)(((byte)(110)))), ((int)(((byte)(114)))));
-			this.downloadPanel.Controls.Add(this.searchPanel);
-			this.downloadPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.downloadPanel.Location = new System.Drawing.Point(20, 20);
-			this.downloadPanel.Name = "downloadPanel";
-			this.downloadPanel.Size = new System.Drawing.Size(610, 522);
-			this.downloadPanel.TabIndex = 0;
-			// 
-			// searchPanel
-			// 
-			this.searchPanel.Controls.Add(this.linkButton);
-			this.searchPanel.Controls.Add(this.linkTextBox);
-			this.searchPanel.Dock = System.Windows.Forms.DockStyle.Top;
-			this.searchPanel.Location = new System.Drawing.Point(0, 0);
-			this.searchPanel.MinimumSize = new System.Drawing.Size(0, 24);
-			this.searchPanel.Name = "searchPanel";
-			this.searchPanel.Size = new System.Drawing.Size(610, 24);
-			this.searchPanel.TabIndex = 1;
-			// 
-			// linkButton
-			// 
-			this.linkButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(52)))), ((int)(((byte)(54)))));
-			this.linkButton.Dock = System.Windows.Forms.DockStyle.Right;
-			this.linkButton.FlatAppearance.BorderSize = 0;
-			this.linkButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.linkButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(230)))), ((int)(((byte)(233)))));
-			this.linkButton.Location = new System.Drawing.Point(535, 0);
-			this.linkButton.Name = "linkButton";
-			this.linkButton.Size = new System.Drawing.Size(75, 24);
-			this.linkButton.TabIndex = 1;
-			this.linkButton.Text = "Download";
-			this.linkButton.UseVisualStyleBackColor = false;
-			this.linkButton.Click += new System.EventHandler(this.linkButton_Click);
-			// 
-			// linkTextBox
-			// 
-			this.linkTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(230)))), ((int)(((byte)(233)))));
-			this.linkTextBox.Dock = System.Windows.Forms.DockStyle.Left;
-			this.linkTextBox.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-			this.linkTextBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(52)))), ((int)(((byte)(54)))));
-			this.linkTextBox.Location = new System.Drawing.Point(0, 0);
-			this.linkTextBox.MinimumSize = new System.Drawing.Size(529, 24);
-			this.linkTextBox.Name = "linkTextBox";
-			this.linkTextBox.Size = new System.Drawing.Size(529, 25);
-			this.linkTextBox.TabIndex = 0;
 			// 
 			// MainForm
 			// 
@@ -278,6 +325,12 @@ namespace Video_Downloader
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Form1";
 			this.Load += new System.EventHandler(this.Form1_Load);
+			contentTabController.ResumeLayout(false);
+			this.downloadTab.ResumeLayout(false);
+			this.downloadPanel.ResumeLayout(false);
+			this.searchPanel.ResumeLayout(false);
+			this.searchPanel.PerformLayout();
+			this.settingsTab.ResumeLayout(false);
 			this.leftMenuPanel.ResumeLayout(false);
 			this.leftMenuPanel.PerformLayout();
 			this.buttonContainer.ResumeLayout(false);
@@ -285,9 +338,6 @@ namespace Video_Downloader
 			((System.ComponentModel.ISupportInitialize)(this.icon)).EndInit();
 			this.titlebarPanel.ResumeLayout(false);
 			this.contentPanel.ResumeLayout(false);
-			this.downloadPanel.ResumeLayout(false);
-			this.searchPanel.ResumeLayout(false);
-			this.searchPanel.PerformLayout();
 			this.ResumeLayout(false);
 
 		}
@@ -310,6 +360,9 @@ namespace Video_Downloader
 		private System.Windows.Forms.Panel searchPanel;
 		private System.Windows.Forms.TextBox linkTextBox;
 		private System.Windows.Forms.Button linkButton;
+		private System.Windows.Forms.TabControl contentTabController;
+		private System.Windows.Forms.TabPage downloadTab;
+		private System.Windows.Forms.TabPage settingsTab;
 	}
 }
 

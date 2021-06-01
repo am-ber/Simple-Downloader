@@ -209,7 +209,7 @@ namespace Video_Downloader
 			// 
 			// settingsPanel
 			// 
-			this.settingsPanel.BackColor = System.Drawing.Color.Transparent;
+			this.settingsPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(99)))), ((int)(((byte)(110)))), ((int)(((byte)(114)))));
 			this.settingsPanel.Location = new System.Drawing.Point(509, 548);
 			this.settingsPanel.Name = "settingsPanel";
 			this.settingsPanel.Size = new System.Drawing.Size(309, 161);
@@ -218,7 +218,7 @@ namespace Video_Downloader
 			// 
 			// downloadPanel
 			// 
-			this.downloadPanel.BackColor = System.Drawing.Color.Transparent;
+			this.downloadPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(99)))), ((int)(((byte)(110)))), ((int)(((byte)(114)))));
 			this.downloadPanel.Controls.Add(this.searchPanel);
 			this.downloadPanel.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.downloadPanel.Location = new System.Drawing.Point(20, 20);

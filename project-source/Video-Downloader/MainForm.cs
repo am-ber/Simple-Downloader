@@ -15,6 +15,7 @@ namespace Video_Downloader
 	{
 		private Panel activePanel;
 		private Button activeNavButton;
+		private Settings settings;
 		#region FormStuff
 		public const int WM_NCLBUTTONDOWN = 0xA1;
 		public const int HT_CAPTION = 0x2;
@@ -29,8 +30,10 @@ namespace Video_Downloader
 			int nLeftRect, int nTopRect,
 			int nRightRect, int nBottomRect,
 			int nWidthEllipse, int nHeightEllipse);
-		public MainForm()
+		public MainForm(Settings settings)
 		{
+			this.settings = settings;
+
 			InitializeComponent();
 			Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 25, 25));
 		}
@@ -106,7 +109,7 @@ namespace Video_Downloader
 
 		private void linkButton_Click(object sender, EventArgs e)
 		{
-			Program.SaveVideoToDisk(linkTextBox.Text, () => DisplayError(""));
+			Program.SaveVideoToDisk(linkTextBox.Text, settings.DownloadLocation,() => DisplayError(""));
 		}
 
 		private void DisplayError(string message)

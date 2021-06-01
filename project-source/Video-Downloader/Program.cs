@@ -82,7 +82,7 @@ namespace Video_Downloader
 			}
 		}
 
-		public delegate void GenericErrorMethod();
+		public delegate void GenericErrorMethod(string err);
 		public static void Log(string msg, bool error = false, GenericErrorMethod gem = null)
 		{
 			StringBuilder sb = new StringBuilder();
@@ -122,7 +122,7 @@ namespace Video_Downloader
 			try
 			{
 				if (gem != null)
-					gem();
+					gem(msg);
 			}
 			catch (Exception e)
 			{

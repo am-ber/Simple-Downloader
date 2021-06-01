@@ -29,7 +29,8 @@ namespace Video_Downloader
 		/// </summary>
 		private void InitializeComponent()
 		{
-			System.Windows.Forms.TabControl contentTabController;
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+			this.contentTabController = new System.Windows.Forms.TabControl();
 			this.downloadTab = new System.Windows.Forms.TabPage();
 			this.downloadPanel = new System.Windows.Forms.Panel();
 			this.searchPanel = new System.Windows.Forms.Panel();
@@ -46,10 +47,10 @@ namespace Video_Downloader
 			this.icon = new System.Windows.Forms.PictureBox();
 			this.titleLable = new System.Windows.Forms.Label();
 			this.titlebarPanel = new System.Windows.Forms.Panel();
+			this.minimizeButton = new System.Windows.Forms.Button();
 			this.closeAppButton = new System.Windows.Forms.Button();
 			this.contentPanel = new System.Windows.Forms.Panel();
-			contentTabController = new System.Windows.Forms.TabControl();
-			contentTabController.SuspendLayout();
+			this.contentTabController.SuspendLayout();
 			this.downloadTab.SuspendLayout();
 			this.downloadPanel.SuspendLayout();
 			this.searchPanel.SuspendLayout();
@@ -64,20 +65,22 @@ namespace Video_Downloader
 			// 
 			// contentTabController
 			// 
-			contentTabController.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
-			contentTabController.Appearance = System.Windows.Forms.TabAppearance.FlatButtons;
-			contentTabController.Controls.Add(this.downloadTab);
-			contentTabController.Controls.Add(this.settingsTab);
-			contentTabController.Dock = System.Windows.Forms.DockStyle.Fill;
-			contentTabController.Font = new System.Drawing.Font("Segoe UI", 1.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-			contentTabController.ItemSize = new System.Drawing.Size(1, 1);
-			contentTabController.Location = new System.Drawing.Point(0, 0);
-			contentTabController.Name = "contentTabController";
-			contentTabController.Padding = new System.Drawing.Point(0, 0);
-			contentTabController.SelectedIndex = 0;
-			contentTabController.Size = new System.Drawing.Size(650, 562);
-			contentTabController.TabIndex = 0;
-			contentTabController.TabStop = false;
+			this.contentTabController.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
+			this.contentTabController.Appearance = System.Windows.Forms.TabAppearance.FlatButtons;
+			this.contentTabController.Controls.Add(this.downloadTab);
+			this.contentTabController.Controls.Add(this.settingsTab);
+			this.contentTabController.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.contentTabController.Font = new System.Drawing.Font("Segoe UI", 1.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+			this.contentTabController.ItemSize = new System.Drawing.Size(0, 1);
+			this.contentTabController.Location = new System.Drawing.Point(0, 0);
+			this.contentTabController.Multiline = true;
+			this.contentTabController.Name = "contentTabController";
+			this.contentTabController.Padding = new System.Drawing.Point(0, 0);
+			this.contentTabController.SelectedIndex = 0;
+			this.contentTabController.Size = new System.Drawing.Size(650, 562);
+			this.contentTabController.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
+			this.contentTabController.TabIndex = 0;
+			this.contentTabController.TabStop = false;
 			// 
 			// downloadTab
 			// 
@@ -270,11 +273,12 @@ namespace Video_Downloader
 			this.titleLable.TabIndex = 1;
 			this.titleLable.Text = "Simple Downloader";
 			this.titleLable.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			this.titleLable.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
+			this.titleLable.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MainForm_MouseDown);
 			// 
 			// titlebarPanel
 			// 
 			this.titlebarPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(99)))), ((int)(((byte)(110)))), ((int)(((byte)(114)))));
+			this.titlebarPanel.Controls.Add(this.minimizeButton);
 			this.titlebarPanel.Controls.Add(this.titleLable);
 			this.titlebarPanel.Controls.Add(this.closeAppButton);
 			this.titlebarPanel.Dock = System.Windows.Forms.DockStyle.Top;
@@ -283,7 +287,22 @@ namespace Video_Downloader
 			this.titlebarPanel.Name = "titlebarPanel";
 			this.titlebarPanel.Size = new System.Drawing.Size(650, 38);
 			this.titlebarPanel.TabIndex = 1;
-			this.titlebarPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
+			this.titlebarPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MainForm_MouseDown);
+			// 
+			// minimizeButton
+			// 
+			this.minimizeButton.Dock = System.Windows.Forms.DockStyle.Right;
+			this.minimizeButton.FlatAppearance.BorderSize = 0;
+			this.minimizeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.minimizeButton.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+			this.minimizeButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(52)))), ((int)(((byte)(54)))));
+			this.minimizeButton.Location = new System.Drawing.Point(598, 0);
+			this.minimizeButton.Name = "minimizeButton";
+			this.minimizeButton.Size = new System.Drawing.Size(26, 38);
+			this.minimizeButton.TabIndex = 2;
+			this.minimizeButton.Text = "-";
+			this.minimizeButton.UseVisualStyleBackColor = true;
+			this.minimizeButton.Click += new System.EventHandler(this.minimizeButton_Click);
 			// 
 			// closeAppButton
 			// 
@@ -303,7 +322,7 @@ namespace Video_Downloader
 			// contentPanel
 			// 
 			this.contentPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(99)))), ((int)(((byte)(110)))), ((int)(((byte)(114)))));
-			this.contentPanel.Controls.Add(contentTabController);
+			this.contentPanel.Controls.Add(this.contentTabController);
 			this.contentPanel.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.contentPanel.Location = new System.Drawing.Point(150, 38);
 			this.contentPanel.Margin = new System.Windows.Forms.Padding(20);
@@ -321,11 +340,12 @@ namespace Video_Downloader
 			this.Controls.Add(this.titlebarPanel);
 			this.Controls.Add(this.leftMenuPanel);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.Name = "MainForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-			this.Text = "Form1";
-			this.Load += new System.EventHandler(this.Form1_Load);
-			contentTabController.ResumeLayout(false);
+			this.Text = "SimpleDownloader";
+			this.Load += new System.EventHandler(this.MainForm_Load);
+			this.contentTabController.ResumeLayout(false);
 			this.downloadTab.ResumeLayout(false);
 			this.downloadPanel.ResumeLayout(false);
 			this.searchPanel.ResumeLayout(false);
@@ -360,9 +380,10 @@ namespace Video_Downloader
 		private System.Windows.Forms.Panel searchPanel;
 		private System.Windows.Forms.TextBox linkTextBox;
 		private System.Windows.Forms.Button linkButton;
-		private System.Windows.Forms.TabControl contentTabController;
 		private System.Windows.Forms.TabPage downloadTab;
 		private System.Windows.Forms.TabPage settingsTab;
+		private System.Windows.Forms.TabControl contentTabController;
+		private System.Windows.Forms.Button minimizeButton;
 	}
 }
 

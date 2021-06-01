@@ -13,7 +13,6 @@ namespace Video_Downloader
 {
 	public partial class MainForm : Form
 	{
-		private Panel activePanel;
 		private Button activeNavButton;
 		private Settings settings;
 		#region FormStuff
@@ -37,12 +36,12 @@ namespace Video_Downloader
 			InitializeComponent();
 			Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 25, 25));
 		}
-		private void Form1_Load(object sender, EventArgs e)
+		private void MainForm_Load(object sender, EventArgs e)
 		{
-			ContentPanelHandler(downloadPanel);
+			ContentPanelHandler(downloadTab);
 			NavButtonActive(downloadButton);
 		}
-		private void Form1_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
+		private void MainForm_MouseDown(object sender, MouseEventArgs e)
 		{
 			if (e.Button == MouseButtons.Left)
 			{
@@ -54,6 +53,10 @@ namespace Video_Downloader
 		private void closeAppButton_Click(object sender, EventArgs e)
 		{
 			Close();
+		}
+		private void minimizeButton_Click(object sender, EventArgs e)
+		{
+			WindowState = FormWindowState.Minimized;
 		}
 		#endregion
 		private void Button_Click(object sender, EventArgs e)
@@ -88,28 +91,30 @@ namespace Video_Downloader
 		{
 			if (activator.Equals(downloadButton))
 			{
-				ContentPanelHandler(downloadPanel);
+				ContentPanelHandler(downloadTab);
 				return;
 			}
 
 			if (activator.Equals(settingsButton))
 			{
-				ContentPanelHandler(settingsPanel);
+				ContentPanelHandler(settingsTab);
 				return;
 			}
 		}
-		private void ContentPanelHandler(Panel newPanel)
+		private void ContentPanelHandler(TabPage page)
 		{
-			if (activePanel == null)
-				activePanel = newPanel;
-			activePanel.Visible = false;
-			activePanel = newPanel;
-			activePanel.Visible = true;
+			contentTabController.Region = new Region(new RectangleF(
+				page.Left,
+				page.Top,
+				page.Width,
+				page.Height)
+			);
+			contentTabController.SelectTab(page);
 		}
 
 		private void linkButton_Click(object sender, EventArgs e)
 		{
-			Program.SaveVideoToDisk(linkTextBox.Text, settings.DownloadLocation,() => DisplayError(""));
+			Program.SaveVideoToDisk(linkTextBox.Text, settings.DownloadLocation,(err) => DisplayError(err));
 		}
 
 		private void DisplayError(string message)

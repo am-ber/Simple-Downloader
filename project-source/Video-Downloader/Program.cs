@@ -29,7 +29,6 @@ namespace Video_Downloader
 
 			Close();
 		}
-
 		private static Settings LoadSettings()
 		{
 			Settings settings = new Settings();
@@ -56,31 +55,10 @@ namespace Video_Downloader
 			{
 				Directory.CreateDirectory("Logs");
 			}
-
 			FileStream f = File.Create(logFileName);
 			f.Close();
 			currentLogFile = File.AppendText(logFileName);
 		}
-
-		public static void SaveVideoToDisk(string link, string location, GenericErrorMethod gem = null)
-		{
-			try
-			{
-				YouTube youTube = YouTube.Default;
-				YouTubeVideo video = youTube.GetVideo(link);
-				Log($"\tSaving ({video.FullName})\n\tto {location}");
-				File.WriteAllBytes(string.Concat(location, @"\",video.FullName), video.GetBytes());
-			}
-			catch (ArgumentException ae)
-			{
-				Log($"\tLink not correct or couldn't find the video location.\n\t{ae.Message}", true, gem);
-			}
-			catch (UnauthorizedAccessException uae)
-			{
-				Log($"\tCan't put file in that directory, hopefully you're ok with the default location.\n\t{uae.Message}", true, gem);
-			}
-		}
-
 		public delegate void GenericErrorMethod(string err);
 		public static void Log(string msg, bool error = false, GenericErrorMethod gem = null)
 		{
@@ -128,7 +106,6 @@ namespace Video_Downloader
 				Console.WriteLine($"Something happened while running the method for handling an error...\n{e.Message}");
 			}
 		}
-
 		public static void Close()
 		{
 			Log($"Ending Execution... ({DateTime.Now})");

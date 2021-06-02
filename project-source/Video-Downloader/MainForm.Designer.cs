@@ -139,17 +139,18 @@ namespace Video_Downloader
 			this.jobTable.Controls.Add(this.tableJobProgressLabel, 2, 0);
 			this.jobTable.Controls.Add(this.tableJobPercentLabel, 1, 0);
 			this.jobTable.Controls.Add(this.tableJobTitleLabel, 0, 0);
-			this.jobTable.Dock = System.Windows.Forms.DockStyle.Top;
+			this.jobTable.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.jobTable.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
 			this.jobTable.Location = new System.Drawing.Point(0, 27);
 			this.jobTable.Margin = new System.Windows.Forms.Padding(0);
 			this.jobTable.MaximumSize = new System.Drawing.Size(622, 500);
-			this.jobTable.MinimumSize = new System.Drawing.Size(622, 32);
+			this.jobTable.MinimumSize = new System.Drawing.Size(622, 500);
 			this.jobTable.Name = "jobTable";
-			this.jobTable.RowCount = 1;
+			this.jobTable.RowCount = 2;
 			this.jobTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
+			this.jobTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
 			this.jobTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
-			this.jobTable.Size = new System.Drawing.Size(622, 32);
+			this.jobTable.Size = new System.Drawing.Size(622, 500);
 			this.jobTable.TabIndex = 2;
 			// 
 			// tableJobProgressLabel

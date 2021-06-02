@@ -19,6 +19,7 @@ namespace Video_Downloader
 		private Button activeNavButton;
 		private Settings settings;
 		private TabPage previousPage;
+		private List<DownloadAgent> agents;
 		#region FormInitializing
 		public const int WM_NCLBUTTONDOWN = 0xA1;
 		public const int HT_CAPTION = 0x2;
@@ -34,7 +35,7 @@ namespace Video_Downloader
 		public MainForm(Settings settings)
 		{
 			this.settings = settings;
-
+			agents = new List<DownloadAgent>();
 			InitializeComponent();
 			Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 25, 25));
 		}
@@ -121,6 +122,11 @@ namespace Video_Downloader
 		}
 		private void closeAppButton_Click(object sender, EventArgs e)
 		{
+			foreach (DownloadAgent agent in agents)
+			{
+				if (!agent.finished)
+					agent.Stop();
+			}
 			Close();
 		}
 		private void minimizeButton_Click(object sender, EventArgs e)
@@ -192,14 +198,28 @@ namespace Video_Downloader
 			errorBodyLabel.Text = message;
 			ContentPanelHandler(errorTab);
 		}
-
-		private void AddNewDownloadJob(IEnumerable<YouTubeVideo> video)
+		private void AddNewDownloadJob(IEnumerable<YouTubeVideo> videos)
 		{
-			
+			YouTubeVideo maxResolution = videos.First(i => i.Resolution == videos.Max(j => j.Resolution));
+			AddDownloadRow(new DownloadAgent(maxResolution, settings));
 		}
 		private void AddDownloadRow(DownloadAgent agent)
 		{
+			Label percentLable = new Label()
+			{
+				Text = "0%"
+			};
+			Label statusLabel = new Label()
+			{
+				Text = "downloading"
+			};
+			jobTable.RowCount = jobTable.RowCount + 1;
+			jobTable.Controls.Add(new Label(){ Name = string.Concat(agent.video.Title, "Label"), Text = agent.video.Title}, 0, jobTable.RowCount - 1);
+			jobTable.Controls.Add(percentLable, 1, jobTable.RowCount - 1);
+			jobTable.Controls.Add(statusLabel, 2, jobTable.RowCount - 1);
 
+			agents.Add(agent);
+			agent.Start(percentLable, statusLabel);
 		}
 	}
 }

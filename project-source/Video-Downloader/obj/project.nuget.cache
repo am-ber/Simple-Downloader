@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "InRHHmnZCwiv0kCL0H2IZ2MLzVlIY0jExp3UchoNl7aoO8Rs6PhrkbGdriPhunKRK6MZvUVMbTQMdh1MOKyUpA==",
+  "dgSpecHash": "2nwNKBbJHo6JPtShioY/oTlNQMEJmEEVVId8gKMKtoqqjrgMG4ho77hSVJUKMpuNH5ByPqFHg5KcAu3xdSPrpQ==",
   "success": true,
   "projectFilePath": "E:\\Documents\\GitHub\\Simple-Downloader\\project-source\\Video-Downloader\\Video-Downloader.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Zach\\.nuget\\packages\\mediatoolkit\\1.1.0.1\\mediatoolkit.1.1.0.1.nupkg.sha512",
     "C:\\Users\\Zach\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
     "C:\\Users\\Zach\\.nuget\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
     "C:\\Users\\Zach\\.nuget\\packages\\microsoft.win32.primitives\\4.3.0\\microsoft.win32.primitives.4.3.0.nupkg.sha512",
@@ -80,5 +81,16 @@
     "C:\\Users\\Zach\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
     "C:\\Users\\Zach\\.nuget\\packages\\videolibrary\\3.1.2\\videolibrary.3.1.2.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'MediaToolkit 1.1.0.1' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework 'net5.0-windows7.0'. This package may not be fully compatible with your project.",
+      "libraryId": "MediaToolkit",
+      "targetGraphs": [
+        "net5.0-windows7.0"
+      ]
+    }
+  ]
 }

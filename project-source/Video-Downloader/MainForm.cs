@@ -14,12 +14,23 @@ using VideoLibrary;
 
 namespace Video_Downloader
 {
+	public struct FileExtensions
+	{
+		public string value { get; set; }
+		public const string mp4 = ".mp4";
+		public const string mp3 = ".mp3";
+
+		public FileExtensions(string value)
+		{
+			this.value = value;
+		}
+	}
 	public partial class MainForm : Form
 	{
 		private Button activeNavButton;
 		private Settings settings;
 		private TabPage previousPage;
-		private List<DownloadAgent> agents;
+		private List<Agent> agents;
 		#region FormInitializing
 		public const int WM_NCLBUTTONDOWN = 0xA1;
 		public const int HT_CAPTION = 0x2;
@@ -35,7 +46,7 @@ namespace Video_Downloader
 		public MainForm(Settings settings)
 		{
 			this.settings = settings;
-			agents = new List<DownloadAgent>();
+			agents = new List<Agent>();
 			InitializeComponent();
 			Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 25, 25));
 		}
@@ -44,7 +55,9 @@ namespace Video_Downloader
 			ContentPanelHandler(downloadTab);
 			NavButtonActive(downloadButton);
 
+			formatDownloadComboBox.Text = settings.LastExtension;
 			downloadLocationTextBox.Text = settings.DownloadLocation;
+			linkTextBox.Text = settings.LastVideoDownloaded;
 			loggingCheckBox.Checked = settings.LogThings;
 		}
 		#endregion
@@ -66,7 +79,7 @@ namespace Video_Downloader
 		{
 			btn.BackColor = Color.Transparent;
 		}
-		private void Button_Click(object sender, EventArgs e)
+		private void NavButtonClick(object sender, EventArgs e)
 		{
 			Program.Log($"\t{sender} Button pressed");
 			if (sender.GetType().IsEquivalentTo(typeof(Button)))
@@ -122,11 +135,12 @@ namespace Video_Downloader
 		}
 		private void closeAppButton_Click(object sender, EventArgs e)
 		{
-			foreach (DownloadAgent agent in agents)
+			foreach (Agent agent in agents)
 			{
 				if (!agent.finished)
-					agent.Stop();
+					agent.ForceStop();
 			}
+			UpdateSettings();
 			Close();
 		}
 		private void minimizeButton_Click(object sender, EventArgs e)
@@ -166,6 +180,8 @@ namespace Video_Downloader
 		}
 		private void UpdateSettings()
 		{
+			settings.LastVideoDownloaded = linkTextBox.Text;
+			settings.LastExtension = formatDownloadComboBox.Text;
 			File.WriteAllText("config.json", JsonConvert.SerializeObject(settings));
 		}
 		private void PanelDecider(Button activator)
@@ -179,6 +195,12 @@ namespace Video_Downloader
 			if (activator.Equals(settingsButton))
 			{
 				ContentPanelHandler(settingsTab);
+				return;
+			}
+
+			if (activator.Equals(convertNavButton))
+			{
+				ContentPanelHandler(convertTab);
 				return;
 			}
 		}
@@ -200,11 +222,24 @@ namespace Video_Downloader
 		}
 		private void AddNewDownloadJob(IEnumerable<YouTubeVideo> videos)
 		{
-			YouTubeVideo maxResolution = videos.First(i => i.Resolution == videos.Max(j => j.Resolution));
-			AddDownloadRow(new DownloadAgent(maxResolution, settings));
+			switch (formatDownloadComboBox.Text)
+			{
+				case (FileExtensions.mp4):
+					YouTubeVideo maxResolution = videos.First(i => i.Resolution == videos.Max(j => j.Resolution));
+					AddDownloadRow(new Agent(maxResolution, settings));
+					break;
+				case (FileExtensions.mp3):
+					YouTubeVideo maxBitrate = videos.First(i => i.AudioBitrate == videos.Max(j => j.AudioBitrate));
+					AddDownloadRow(new Agent(maxBitrate, settings, true));
+					break;
+			}
 		}
-		private void AddDownloadRow(DownloadAgent agent)
+		private void AddDownloadRow(Agent agent)
 		{
+			Label titleLabel = new Label()
+			{
+				Text = agent.video.FullName
+			};
 			Label percentLable = new Label()
 			{
 				Text = "0%"
@@ -213,13 +248,33 @@ namespace Video_Downloader
 			{
 				Text = "downloading"
 			};
+			Button forceEndButton = new Button()
+			{
+				Text = "X",
+				FlatStyle = FlatStyle.Flat,
+				BackColor = Color.FromArgb(178, 190, 195),
+				ForeColor = Color.FromArgb(45, 52, 54)
+			};
+			forceEndButton.Click += ((sender, args) =>
+			{
+				agent.ForceStop();
+				forceEndButton.Visible = false;
+				statusLabel.Text = "Canceled";
+				titleLabel.ForeColor = Color.FromArgb(255, 118, 117);
+				statusLabel.ForeColor = Color.FromArgb(255, 118, 117);
+				percentLable.ForeColor = Color.FromArgb(255, 118, 117);
+			});
 			jobTable.RowCount = jobTable.RowCount + 1;
-			jobTable.Controls.Add(new Label(){ Name = string.Concat(agent.video.Title, "Label"), Text = agent.video.Title}, 0, jobTable.RowCount - 1);
+			jobTable.Controls.Add(titleLabel, 0, jobTable.RowCount - 1);
 			jobTable.Controls.Add(percentLable, 1, jobTable.RowCount - 1);
 			jobTable.Controls.Add(statusLabel, 2, jobTable.RowCount - 1);
-
+			jobTable.Controls.Add(forceEndButton, 3, jobTable.RowCount - 1);
 			agents.Add(agent);
-			agent.Start(percentLable, statusLabel);
+			agent.Start(percentLable, statusLabel, PrintToLog);
+		}
+		private void PrintToLog(string message)
+		{
+			Program.Log(message);
 		}
 	}
 }

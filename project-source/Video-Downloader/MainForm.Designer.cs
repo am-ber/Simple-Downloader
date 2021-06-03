@@ -56,6 +56,16 @@ namespace Video_Downloader
 			this.errorTitle = new System.Windows.Forms.Label();
 			this.errorCloseButton = new System.Windows.Forms.Button();
 			this.convertTab = new System.Windows.Forms.TabPage();
+			this.convertContentPanel = new System.Windows.Forms.Panel();
+			this.convertOutputPanel = new System.Windows.Forms.Panel();
+			this.convertOutputLabel = new System.Windows.Forms.Label();
+			this.convertInputPanel = new System.Windows.Forms.Panel();
+			this.convertInputLabel = new System.Windows.Forms.Label();
+			this.convertJobTable = new System.Windows.Forms.TableLayoutPanel();
+			this.convertJobStatusLabel = new System.Windows.Forms.Label();
+			this.convertJobTimeLabel = new System.Windows.Forms.Label();
+			this.convertJobTitleLabel = new System.Windows.Forms.Label();
+			this.convertJobCancelLabel = new System.Windows.Forms.Label();
 			this.leftMenuPanel = new System.Windows.Forms.Panel();
 			this.buttonContainer = new System.Windows.Forms.Panel();
 			this.settingsButton = new System.Windows.Forms.Button();
@@ -69,16 +79,6 @@ namespace Video_Downloader
 			this.minimizeButton = new System.Windows.Forms.Button();
 			this.closeAppButton = new System.Windows.Forms.Button();
 			this.contentPanel = new System.Windows.Forms.Panel();
-			this.convertJobTable = new System.Windows.Forms.TableLayoutPanel();
-			this.convertJobStatusLabel = new System.Windows.Forms.Label();
-			this.convertJobTimeLabel = new System.Windows.Forms.Label();
-			this.convertJobTitleLabel = new System.Windows.Forms.Label();
-			this.convertJobCancelLabel = new System.Windows.Forms.Label();
-			this.convertContentPanel = new System.Windows.Forms.Panel();
-			this.convertInputPanel = new System.Windows.Forms.Panel();
-			this.convertOutputPanel = new System.Windows.Forms.Panel();
-			this.convertInputLabel = new System.Windows.Forms.Label();
-			this.convertOutputLabel = new System.Windows.Forms.Label();
 			this.contentTabController.SuspendLayout();
 			this.downloadTab.SuspendLayout();
 			this.downloadPanel.SuspendLayout();
@@ -92,16 +92,16 @@ namespace Video_Downloader
 			this.errorContentPanel.SuspendLayout();
 			this.errorTitlePanel.SuspendLayout();
 			this.convertTab.SuspendLayout();
+			this.convertContentPanel.SuspendLayout();
+			this.convertOutputPanel.SuspendLayout();
+			this.convertInputPanel.SuspendLayout();
+			this.convertJobTable.SuspendLayout();
 			this.leftMenuPanel.SuspendLayout();
 			this.buttonContainer.SuspendLayout();
 			this.iconTitlePanel.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.icon)).BeginInit();
 			this.titlebarPanel.SuspendLayout();
 			this.contentPanel.SuspendLayout();
-			this.convertJobTable.SuspendLayout();
-			this.convertContentPanel.SuspendLayout();
-			this.convertInputPanel.SuspendLayout();
-			this.convertOutputPanel.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// contentTabController
@@ -463,6 +463,141 @@ namespace Video_Downloader
 			this.convertTab.Size = new System.Drawing.Size(642, 553);
 			this.convertTab.TabIndex = 3;
 			// 
+			// convertContentPanel
+			// 
+			this.convertContentPanel.Controls.Add(this.convertOutputPanel);
+			this.convertContentPanel.Controls.Add(this.convertInputPanel);
+			this.convertContentPanel.Dock = System.Windows.Forms.DockStyle.Top;
+			this.convertContentPanel.Location = new System.Drawing.Point(3, 3);
+			this.convertContentPanel.Name = "convertContentPanel";
+			this.convertContentPanel.Size = new System.Drawing.Size(636, 244);
+			this.convertContentPanel.TabIndex = 4;
+			// 
+			// convertOutputPanel
+			// 
+			this.convertOutputPanel.Controls.Add(this.convertOutputLabel);
+			this.convertOutputPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
+			this.convertOutputPanel.Location = new System.Drawing.Point(0, 124);
+			this.convertOutputPanel.Name = "convertOutputPanel";
+			this.convertOutputPanel.Size = new System.Drawing.Size(636, 120);
+			this.convertOutputPanel.TabIndex = 1;
+			// 
+			// convertOutputLabel
+			// 
+			this.convertOutputLabel.Dock = System.Windows.Forms.DockStyle.Top;
+			this.convertOutputLabel.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+			this.convertOutputLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(52)))), ((int)(((byte)(54)))));
+			this.convertOutputLabel.Location = new System.Drawing.Point(0, 0);
+			this.convertOutputLabel.Name = "convertOutputLabel";
+			this.convertOutputLabel.Size = new System.Drawing.Size(636, 31);
+			this.convertOutputLabel.TabIndex = 1;
+			this.convertOutputLabel.Text = "Output";
+			this.convertOutputLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			// 
+			// convertInputPanel
+			// 
+			this.convertInputPanel.Controls.Add(this.convertInputLabel);
+			this.convertInputPanel.Dock = System.Windows.Forms.DockStyle.Top;
+			this.convertInputPanel.Location = new System.Drawing.Point(0, 0);
+			this.convertInputPanel.Name = "convertInputPanel";
+			this.convertInputPanel.Size = new System.Drawing.Size(636, 124);
+			this.convertInputPanel.TabIndex = 0;
+			// 
+			// convertInputLabel
+			// 
+			this.convertInputLabel.Dock = System.Windows.Forms.DockStyle.Top;
+			this.convertInputLabel.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+			this.convertInputLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(52)))), ((int)(((byte)(54)))));
+			this.convertInputLabel.Location = new System.Drawing.Point(0, 0);
+			this.convertInputLabel.Name = "convertInputLabel";
+			this.convertInputLabel.Size = new System.Drawing.Size(636, 31);
+			this.convertInputLabel.TabIndex = 0;
+			this.convertInputLabel.Text = "Input";
+			this.convertInputLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			// 
+			// convertJobTable
+			// 
+			this.convertJobTable.AutoScroll = true;
+			this.convertJobTable.BackColor = System.Drawing.Color.Transparent;
+			this.convertJobTable.ColumnCount = 4;
+			this.convertJobTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 360F));
+			this.convertJobTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
+			this.convertJobTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
+			this.convertJobTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 76F));
+			this.convertJobTable.Controls.Add(this.convertJobStatusLabel, 2, 0);
+			this.convertJobTable.Controls.Add(this.convertJobTimeLabel, 1, 0);
+			this.convertJobTable.Controls.Add(this.convertJobTitleLabel, 0, 0);
+			this.convertJobTable.Controls.Add(this.convertJobCancelLabel, 3, 0);
+			this.convertJobTable.Dock = System.Windows.Forms.DockStyle.Bottom;
+			this.convertJobTable.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+			this.convertJobTable.Location = new System.Drawing.Point(3, 250);
+			this.convertJobTable.Margin = new System.Windows.Forms.Padding(0);
+			this.convertJobTable.MinimumSize = new System.Drawing.Size(622, 300);
+			this.convertJobTable.Name = "convertJobTable";
+			this.convertJobTable.RowCount = 2;
+			this.convertJobTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
+			this.convertJobTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+			this.convertJobTable.Size = new System.Drawing.Size(636, 300);
+			this.convertJobTable.TabIndex = 3;
+			// 
+			// convertJobStatusLabel
+			// 
+			this.convertJobStatusLabel.AutoSize = true;
+			this.convertJobStatusLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(52)))), ((int)(((byte)(54)))));
+			this.convertJobStatusLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.convertJobStatusLabel.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+			this.convertJobStatusLabel.Location = new System.Drawing.Point(440, 0);
+			this.convertJobStatusLabel.Margin = new System.Windows.Forms.Padding(0);
+			this.convertJobStatusLabel.Name = "convertJobStatusLabel";
+			this.convertJobStatusLabel.Size = new System.Drawing.Size(120, 32);
+			this.convertJobStatusLabel.TabIndex = 2;
+			this.convertJobStatusLabel.Text = "Status";
+			this.convertJobStatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// convertJobTimeLabel
+			// 
+			this.convertJobTimeLabel.AutoSize = true;
+			this.convertJobTimeLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(52)))), ((int)(((byte)(54)))));
+			this.convertJobTimeLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.convertJobTimeLabel.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+			this.convertJobTimeLabel.Location = new System.Drawing.Point(360, 0);
+			this.convertJobTimeLabel.Margin = new System.Windows.Forms.Padding(0);
+			this.convertJobTimeLabel.Name = "convertJobTimeLabel";
+			this.convertJobTimeLabel.Size = new System.Drawing.Size(80, 32);
+			this.convertJobTimeLabel.TabIndex = 1;
+			this.convertJobTimeLabel.Text = "Time";
+			this.convertJobTimeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// convertJobTitleLabel
+			// 
+			this.convertJobTitleLabel.AutoSize = true;
+			this.convertJobTitleLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(52)))), ((int)(((byte)(54)))));
+			this.convertJobTitleLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.convertJobTitleLabel.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+			this.convertJobTitleLabel.Location = new System.Drawing.Point(0, 0);
+			this.convertJobTitleLabel.Margin = new System.Windows.Forms.Padding(0);
+			this.convertJobTitleLabel.Name = "convertJobTitleLabel";
+			this.convertJobTitleLabel.Size = new System.Drawing.Size(360, 32);
+			this.convertJobTitleLabel.TabIndex = 0;
+			this.convertJobTitleLabel.Text = "File Name";
+			this.convertJobTitleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// convertJobCancelLabel
+			// 
+			this.convertJobCancelLabel.AutoSize = true;
+			this.convertJobCancelLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(52)))), ((int)(((byte)(54)))));
+			this.convertJobCancelLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.convertJobCancelLabel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.convertJobCancelLabel.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+			this.convertJobCancelLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(230)))), ((int)(((byte)(233)))));
+			this.convertJobCancelLabel.Location = new System.Drawing.Point(560, 0);
+			this.convertJobCancelLabel.Margin = new System.Windows.Forms.Padding(0);
+			this.convertJobCancelLabel.Name = "convertJobCancelLabel";
+			this.convertJobCancelLabel.Size = new System.Drawing.Size(76, 32);
+			this.convertJobCancelLabel.TabIndex = 3;
+			this.convertJobCancelLabel.Text = "Cancel";
+			this.convertJobCancelLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
 			// leftMenuPanel
 			// 
 			this.leftMenuPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(52)))), ((int)(((byte)(54)))));
@@ -650,141 +785,6 @@ namespace Video_Downloader
 			this.contentPanel.Size = new System.Drawing.Size(650, 562);
 			this.contentPanel.TabIndex = 2;
 			// 
-			// convertJobTable
-			// 
-			this.convertJobTable.AutoScroll = true;
-			this.convertJobTable.BackColor = System.Drawing.Color.Transparent;
-			this.convertJobTable.ColumnCount = 4;
-			this.convertJobTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 360F));
-			this.convertJobTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
-			this.convertJobTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
-			this.convertJobTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 62F));
-			this.convertJobTable.Controls.Add(this.convertJobStatusLabel, 2, 0);
-			this.convertJobTable.Controls.Add(this.convertJobTimeLabel, 1, 0);
-			this.convertJobTable.Controls.Add(this.convertJobTitleLabel, 0, 0);
-			this.convertJobTable.Controls.Add(this.convertJobCancelLabel, 3, 0);
-			this.convertJobTable.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.convertJobTable.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-			this.convertJobTable.Location = new System.Drawing.Point(3, 250);
-			this.convertJobTable.Margin = new System.Windows.Forms.Padding(0);
-			this.convertJobTable.MinimumSize = new System.Drawing.Size(622, 300);
-			this.convertJobTable.Name = "convertJobTable";
-			this.convertJobTable.RowCount = 2;
-			this.convertJobTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
-			this.convertJobTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-			this.convertJobTable.Size = new System.Drawing.Size(636, 300);
-			this.convertJobTable.TabIndex = 3;
-			// 
-			// convertJobStatusLabel
-			// 
-			this.convertJobStatusLabel.AutoSize = true;
-			this.convertJobStatusLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(52)))), ((int)(((byte)(54)))));
-			this.convertJobStatusLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.convertJobStatusLabel.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-			this.convertJobStatusLabel.Location = new System.Drawing.Point(440, 0);
-			this.convertJobStatusLabel.Margin = new System.Windows.Forms.Padding(0);
-			this.convertJobStatusLabel.Name = "convertJobStatusLabel";
-			this.convertJobStatusLabel.Size = new System.Drawing.Size(120, 32);
-			this.convertJobStatusLabel.TabIndex = 2;
-			this.convertJobStatusLabel.Text = "Status";
-			this.convertJobStatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			// 
-			// convertJobTimeLabel
-			// 
-			this.convertJobTimeLabel.AutoSize = true;
-			this.convertJobTimeLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(52)))), ((int)(((byte)(54)))));
-			this.convertJobTimeLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.convertJobTimeLabel.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-			this.convertJobTimeLabel.Location = new System.Drawing.Point(360, 0);
-			this.convertJobTimeLabel.Margin = new System.Windows.Forms.Padding(0);
-			this.convertJobTimeLabel.Name = "convertJobTimeLabel";
-			this.convertJobTimeLabel.Size = new System.Drawing.Size(80, 32);
-			this.convertJobTimeLabel.TabIndex = 1;
-			this.convertJobTimeLabel.Text = "Time";
-			this.convertJobTimeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			// 
-			// convertJobTitleLabel
-			// 
-			this.convertJobTitleLabel.AutoSize = true;
-			this.convertJobTitleLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(52)))), ((int)(((byte)(54)))));
-			this.convertJobTitleLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.convertJobTitleLabel.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-			this.convertJobTitleLabel.Location = new System.Drawing.Point(0, 0);
-			this.convertJobTitleLabel.Margin = new System.Windows.Forms.Padding(0);
-			this.convertJobTitleLabel.Name = "convertJobTitleLabel";
-			this.convertJobTitleLabel.Size = new System.Drawing.Size(360, 32);
-			this.convertJobTitleLabel.TabIndex = 0;
-			this.convertJobTitleLabel.Text = "File Name";
-			this.convertJobTitleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			// 
-			// convertJobCancelLabel
-			// 
-			this.convertJobCancelLabel.AutoSize = true;
-			this.convertJobCancelLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(52)))), ((int)(((byte)(54)))));
-			this.convertJobCancelLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.convertJobCancelLabel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.convertJobCancelLabel.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-			this.convertJobCancelLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(230)))), ((int)(((byte)(233)))));
-			this.convertJobCancelLabel.Location = new System.Drawing.Point(560, 0);
-			this.convertJobCancelLabel.Margin = new System.Windows.Forms.Padding(0);
-			this.convertJobCancelLabel.Name = "convertJobCancelLabel";
-			this.convertJobCancelLabel.Size = new System.Drawing.Size(76, 32);
-			this.convertJobCancelLabel.TabIndex = 3;
-			this.convertJobCancelLabel.Text = "Cancel";
-			this.convertJobCancelLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			// 
-			// convertContentPanel
-			// 
-			this.convertContentPanel.Controls.Add(this.convertOutputPanel);
-			this.convertContentPanel.Controls.Add(this.convertInputPanel);
-			this.convertContentPanel.Dock = System.Windows.Forms.DockStyle.Top;
-			this.convertContentPanel.Location = new System.Drawing.Point(3, 3);
-			this.convertContentPanel.Name = "convertContentPanel";
-			this.convertContentPanel.Size = new System.Drawing.Size(636, 244);
-			this.convertContentPanel.TabIndex = 4;
-			// 
-			// convertInputPanel
-			// 
-			this.convertInputPanel.Controls.Add(this.convertInputLabel);
-			this.convertInputPanel.Dock = System.Windows.Forms.DockStyle.Top;
-			this.convertInputPanel.Location = new System.Drawing.Point(0, 0);
-			this.convertInputPanel.Name = "convertInputPanel";
-			this.convertInputPanel.Size = new System.Drawing.Size(636, 124);
-			this.convertInputPanel.TabIndex = 0;
-			// 
-			// convertOutputPanel
-			// 
-			this.convertOutputPanel.Controls.Add(this.convertOutputLabel);
-			this.convertOutputPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.convertOutputPanel.Location = new System.Drawing.Point(0, 124);
-			this.convertOutputPanel.Name = "convertOutputPanel";
-			this.convertOutputPanel.Size = new System.Drawing.Size(636, 120);
-			this.convertOutputPanel.TabIndex = 1;
-			// 
-			// convertInputLabel
-			// 
-			this.convertInputLabel.Dock = System.Windows.Forms.DockStyle.Top;
-			this.convertInputLabel.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-			this.convertInputLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(52)))), ((int)(((byte)(54)))));
-			this.convertInputLabel.Location = new System.Drawing.Point(0, 0);
-			this.convertInputLabel.Name = "convertInputLabel";
-			this.convertInputLabel.Size = new System.Drawing.Size(636, 31);
-			this.convertInputLabel.TabIndex = 0;
-			this.convertInputLabel.Text = "Input";
-			this.convertInputLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			// 
-			// convertOutputLabel
-			// 
-			this.convertOutputLabel.Dock = System.Windows.Forms.DockStyle.Top;
-			this.convertOutputLabel.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-			this.convertOutputLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(52)))), ((int)(((byte)(54)))));
-			this.convertOutputLabel.Location = new System.Drawing.Point(0, 0);
-			this.convertOutputLabel.Name = "convertOutputLabel";
-			this.convertOutputLabel.Size = new System.Drawing.Size(636, 31);
-			this.convertOutputLabel.TabIndex = 1;
-			this.convertOutputLabel.Text = "Output";
-			this.convertOutputLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -818,6 +818,11 @@ namespace Video_Downloader
 			this.errorContentPanel.PerformLayout();
 			this.errorTitlePanel.ResumeLayout(false);
 			this.convertTab.ResumeLayout(false);
+			this.convertContentPanel.ResumeLayout(false);
+			this.convertOutputPanel.ResumeLayout(false);
+			this.convertInputPanel.ResumeLayout(false);
+			this.convertJobTable.ResumeLayout(false);
+			this.convertJobTable.PerformLayout();
 			this.leftMenuPanel.ResumeLayout(false);
 			this.leftMenuPanel.PerformLayout();
 			this.buttonContainer.ResumeLayout(false);
@@ -825,11 +830,6 @@ namespace Video_Downloader
 			((System.ComponentModel.ISupportInitialize)(this.icon)).EndInit();
 			this.titlebarPanel.ResumeLayout(false);
 			this.contentPanel.ResumeLayout(false);
-			this.convertJobTable.ResumeLayout(false);
-			this.convertJobTable.PerformLayout();
-			this.convertContentPanel.ResumeLayout(false);
-			this.convertInputPanel.ResumeLayout(false);
-			this.convertOutputPanel.ResumeLayout(false);
 			this.ResumeLayout(false);
 
 		}

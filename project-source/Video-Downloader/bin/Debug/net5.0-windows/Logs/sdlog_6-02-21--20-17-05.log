@@ -1,0 +1,15 @@
+Simple Downloader starting execution(06/02/2021 20:17:05)...
+	System.Windows.Forms.Button, Text: Convert Button pressed
+	System.Windows.Forms.Button, Text: Settings Button pressed
+	System.Windows.Forms.Button, Text: Download Button pressed
+	System.Windows.Forms.Button, Text: Convert Button pressed
+	System.Windows.Forms.Button, Text: Download Button pressed
+
+---------------------
+Initializing job.
+	Starting job at (06/02/2021 20:17:53)
+Running job for regular video download.
+Total bytes: 2929665
+Finished downloading for:
+Fox Stevenson - All Eyes On Me
+Ending Execution... (06/02/2021 20:18:56)

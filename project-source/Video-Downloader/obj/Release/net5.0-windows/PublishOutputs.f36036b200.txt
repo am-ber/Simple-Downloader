@@ -1,0 +1,8 @@
+E:\Documents\GitHub\Simple-Downloader\builds\Video-Downloader.exe
+E:\Documents\GitHub\Simple-Downloader\builds\Video-Downloader.dll
+E:\Documents\GitHub\Simple-Downloader\builds\Video-Downloader.deps.json
+E:\Documents\GitHub\Simple-Downloader\builds\Video-Downloader.runtimeconfig.json
+E:\Documents\GitHub\Simple-Downloader\builds\Video-Downloader.pdb
+E:\Documents\GitHub\Simple-Downloader\builds\MediaToolkit.dll
+E:\Documents\GitHub\Simple-Downloader\builds\Newtonsoft.Json.dll
+E:\Documents\GitHub\Simple-Downloader\builds\libvideo.dll

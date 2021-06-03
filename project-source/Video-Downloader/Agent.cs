@@ -154,6 +154,10 @@ namespace Video_Downloader
 			LogBuilder.Append("\nRunning job for conversion");
 			try
 			{
+				statusLabel.Invoke(new Action(() =>
+				{
+					statusLabel.Text = "Converting";
+				}));
 				MediaFile inputFile = new MediaFile()
 				{
 					Filename = fileLocation
@@ -176,17 +180,10 @@ namespace Video_Downloader
 					};
 					engine.Convert(inputFile, outputFile);
 				}
-				if (statusLabel.InvokeRequired)
-				{
-					statusLabel.Invoke(new Action(() =>
-					{
-						statusLabel.Text = "Converted";
-					}));
-				}
-				else
+				statusLabel.Invoke(new Action(() =>
 				{
 					statusLabel.Text = "Converted";
-				}
+				}));
 			}
 			catch (Exception e)
 			{

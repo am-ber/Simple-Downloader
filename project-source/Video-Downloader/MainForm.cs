@@ -222,14 +222,22 @@ namespace Video_Downloader
 		}
 		private void AddNewDownloadJob(IEnumerable<YouTubeVideo> videos)
 		{
+			YouTubeVideo maxQualityVideo = videos.First();
+			foreach (YouTubeVideo v in videos)
+			{
+				if (v.Resolution > maxQualityVideo.Resolution && v.AudioBitrate > maxQualityVideo.AudioBitrate)
+				{
+					maxQualityVideo = v;
+				}
+			}
+
+			YouTubeVideo maxBitrate = videos.First(i => i.AudioBitrate == videos.Max(j => j.AudioBitrate));
 			switch (formatDownloadComboBox.Text)
 			{
 				case (FileExtensions.mp4):
-					YouTubeVideo maxResolution = videos.First(i => i.Resolution == videos.Max(j => j.Resolution));
-					AddDownloadRow(new Agent(maxResolution, settings));
+					AddDownloadRow(new Agent(maxQualityVideo, settings));
 					break;
 				case (FileExtensions.mp3):
-					YouTubeVideo maxBitrate = videos.First(i => i.AudioBitrate == videos.Max(j => j.AudioBitrate));
 					AddDownloadRow(new Agent(maxBitrate, settings, true));
 					break;
 			}

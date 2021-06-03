@@ -6,6 +6,7 @@
     <RootNamespace>Video_Downloader</RootNamespace>
     <UseWindowsForms>true</UseWindowsForms>
     <ApplicationIcon>icons\logo.ico</ApplicationIcon>
+    <StartupObject>Video_Downloader.Program</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>

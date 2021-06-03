@@ -4560,19 +4560,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Zach\\.nuget\\packages\\": {}
+    "C:\\Users\\zvanscoit\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\Documents\\GitHub\\Simple-Downloader\\project-source\\Video-Downloader\\Video-Downloader.csproj",
+      "projectUniqueName": "C:\\Users\\zvanscoit\\Downloads\\Simple-Downloader\\project-source\\Video-Downloader\\Video-Downloader.csproj",
       "projectName": "Video-Downloader",
-      "projectPath": "E:\\Documents\\GitHub\\Simple-Downloader\\project-source\\Video-Downloader\\Video-Downloader.csproj",
-      "packagesPath": "C:\\Users\\Zach\\.nuget\\packages\\",
-      "outputPath": "E:\\Documents\\GitHub\\Simple-Downloader\\project-source\\Video-Downloader\\obj\\",
+      "projectPath": "C:\\Users\\zvanscoit\\Downloads\\Simple-Downloader\\project-source\\Video-Downloader\\Video-Downloader.csproj",
+      "packagesPath": "C:\\Users\\zvanscoit\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\zvanscoit\\Downloads\\Simple-Downloader\\project-source\\Video-Downloader\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Zach\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\zvanscoit\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -4625,7 +4625,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
       }
     }
   },

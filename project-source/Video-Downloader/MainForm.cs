@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Drawing;
 using System.IO;
@@ -14,23 +15,13 @@ using VideoLibrary;
 
 namespace Video_Downloader
 {
-	public struct FileExtensions
-	{
-		public string value { get; set; }
-		public const string mp4 = ".mp4";
-		public const string mp3 = ".mp3";
-
-		public FileExtensions(string value)
-		{
-			this.value = value;
-		}
-	}
 	public partial class MainForm : Form
 	{
 		private Button activeNavButton;
 		private Settings settings;
 		private TabPage previousPage;
 		private List<Agent> agents;
+		private StringBuilder convertExtensionFilterBuilder;
 		#region FormInitializing
 		public const int WM_NCLBUTTONDOWN = 0xA1;
 		public const int HT_CAPTION = 0x2;
@@ -48,17 +39,41 @@ namespace Video_Downloader
 			this.settings = settings;
 			agents = new List<Agent>();
 			InitializeComponent();
-			Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 25, 25));
+			InitConvertFilterBuilder();
+			Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 0, 0));
 		}
 		private void MainForm_Load(object sender, EventArgs e)
 		{
 			ContentPanelHandler(downloadTab);
 			NavButtonActive(downloadButton);
-
+			InitFormControllers();
+		}
+		private void InitFormControllers()
+		{
+			formatDownloadComboBox.Items.Add(".mp4");
+			formatDownloadComboBox.Items.Add(".mp3");
 			formatDownloadComboBox.Text = settings.LastExtension;
 			downloadLocationTextBox.Text = settings.DownloadLocation;
 			linkTextBox.Text = settings.LastVideoDownloaded;
+			convertOutputLocationTextBox.Text = settings.DownloadLocation;
 			loggingCheckBox.Checked = settings.LogThings;
+
+			convertExtensionComboBox.Items.AddRange(FileExtensions.AudioFormats);
+			convertExtensionComboBox.Items.AddRange(FileExtensions.VideoFormats);
+			convertExtensionComboBox.Text = FileExtensions.mp3;
+		}
+		private void InitConvertFilterBuilder()
+		{
+			convertExtensionFilterBuilder = new StringBuilder("Audio Files|");
+			foreach (string extension in FileExtensions.AudioFormats)
+			{
+				convertExtensionFilterBuilder.Append($"*{extension};");
+			}
+			convertExtensionFilterBuilder.Append("|Video Files|");
+			foreach (string extension in FileExtensions.VideoFormats)
+			{
+				convertExtensionFilterBuilder.Append($"*{extension};");
+			}
 		}
 		#endregion
 
@@ -90,6 +105,7 @@ namespace Video_Downloader
 		}
 		private void linkButton_Click(object sender, EventArgs e)
 		{
+			Program.Log($"\t{sender} Button pressed");
 			try
 			{
 				YouTube youTube = YouTube.Default;
@@ -109,10 +125,12 @@ namespace Video_Downloader
 		}
 		private void errorCloseButton_Click(object sender, EventArgs e)
 		{
+			Program.Log($"\t{sender} Button pressed");
 			contentTabController.SelectedTab = previousPage;
 		}
 		private void downloadLocation_Click(object sender, EventArgs e)
 		{
+			Program.Log($"\t{sender} Button pressed");
 			using (FolderBrowserDialog folderDialog = new FolderBrowserDialog())
 			{
 				DialogResult result = folderDialog.ShowDialog();
@@ -135,6 +153,7 @@ namespace Video_Downloader
 		}
 		private void closeAppButton_Click(object sender, EventArgs e)
 		{
+			Program.Log($"\t{sender} Button pressed");
 			foreach (Agent agent in agents)
 			{
 				if (!agent.finished)
@@ -145,11 +164,54 @@ namespace Video_Downloader
 		}
 		private void minimizeButton_Click(object sender, EventArgs e)
 		{
+			Program.Log($"\t{sender} Button pressed");
 			WindowState = FormWindowState.Minimized;
+		}
+		private void convertInputSelectFileButtonClick(object sender, EventArgs e)
+		{
+			Program.Log($"\t{sender} Button pressed");
+			OpenFileDialog dialog = new OpenFileDialog()
+			{
+				Filter = convertExtensionFilterBuilder.ToString(),
+				InitialDirectory = settings.DownloadLocation,
+				Title = "Select a file to convert."
+			};
+			if (dialog.ShowDialog() == DialogResult.OK)
+			{
+				convertInputFileLocationTextBox.Text = dialog.FileName;
+			}
+		}
+		private void convertOutputLocationButtonClick(object sender, EventArgs e)
+		{
+			Program.Log($"\t{sender} Button pressed");
+			using (FolderBrowserDialog folderDialog = new FolderBrowserDialog())
+			{
+				DialogResult result = folderDialog.ShowDialog();
+
+				if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(folderDialog.SelectedPath))
+				{
+					convertOutputLocationTextBox.Text = folderDialog.SelectedPath;
+				}
+			}
+		}
+		private void convertStartButtonClick(object sender, EventArgs e)
+		{
+			Program.Log($"\t{sender} Button pressed");
+			try
+			{
+				AddJobRow(new Agent(convertInputFileLocationTextBox.Text,
+						new FileExtensions(convertExtensionComboBox.Text)),
+					convertJobTable);
+			}
+			catch (Exception ex)
+			{
+				DisplayError($"***shruging***\n{ex.Message}");
+			}
 		}
 		#endregion
 		private void downloadLocationTextBox_KeyDown(object sender, KeyEventArgs e)
 		{
+			Program.Log($"\tUser pressed enter on {sender}");
 			if (e.KeyCode == Keys.Enter)
 			{
 				bool incorrect = Directory.Exists(downloadLocationTextBox.Text);
@@ -175,11 +237,13 @@ namespace Video_Downloader
 		}
 		private void loggingCheckBox_CheckStateChanged(object sender, EventArgs e)
 		{
+			Program.Log("\tUser toggled logging.");
 			settings.LogThings = loggingCheckBox.Checked;
 			UpdateSettings();
 		}
 		private void UpdateSettings()
 		{
+			Program.Log("Updating settings file.");
 			settings.LastVideoDownloaded = linkTextBox.Text;
 			settings.LastExtension = formatDownloadComboBox.Text;
 			File.WriteAllText("config.json", JsonConvert.SerializeObject(settings));
@@ -216,6 +280,7 @@ namespace Video_Downloader
 		}
 		private void DisplayError(string message)
 		{
+			Program.Log($"\tDisplaying Error message: {message}");
 			previousPage = contentTabController.SelectedTab;
 			errorBodyLabel.Text = message;
 			ContentPanelHandler(errorTab);
@@ -235,14 +300,14 @@ namespace Video_Downloader
 			switch (formatDownloadComboBox.Text)
 			{
 				case (FileExtensions.mp4):
-					AddDownloadRow(new Agent(maxQualityVideo, settings));
+					AddJobRow(new Agent(maxQualityVideo, settings), jobTable);
 					break;
 				case (FileExtensions.mp3):
-					AddDownloadRow(new Agent(maxBitrate, settings, true));
+					AddJobRow(new Agent(maxBitrate, settings, true), jobTable);
 					break;
 			}
 		}
-		private void AddDownloadRow(Agent agent)
+		private void AddJobRow(Agent agent, TableLayoutPanel panel)
 		{
 			Label titleLabel = new Label()
 			{
@@ -254,7 +319,7 @@ namespace Video_Downloader
 			};
 			Label statusLabel = new Label()
 			{
-				Text = "downloading"
+				Text = "Starting"
 			};
 			Button forceEndButton = new Button()
 			{
@@ -272,11 +337,11 @@ namespace Video_Downloader
 				statusLabel.ForeColor = Color.FromArgb(255, 118, 117);
 				percentLable.ForeColor = Color.FromArgb(255, 118, 117);
 			});
-			jobTable.RowCount = jobTable.RowCount + 1;
-			jobTable.Controls.Add(titleLabel, 0, jobTable.RowCount - 1);
-			jobTable.Controls.Add(percentLable, 1, jobTable.RowCount - 1);
-			jobTable.Controls.Add(statusLabel, 2, jobTable.RowCount - 1);
-			jobTable.Controls.Add(forceEndButton, 3, jobTable.RowCount - 1);
+			panel.RowCount = panel.RowCount + 1;
+			panel.Controls.Add(titleLabel, 0, panel.RowCount - 1);
+			panel.Controls.Add(percentLable, 1, panel.RowCount - 1);
+			panel.Controls.Add(statusLabel, 2, panel.RowCount - 1);
+			panel.Controls.Add(forceEndButton, 3, panel.RowCount - 1);
 			agents.Add(agent);
 			agent.Start(percentLable, statusLabel, PrintToLog);
 		}

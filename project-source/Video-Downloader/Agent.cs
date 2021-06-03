@@ -24,7 +24,7 @@ namespace Video_Downloader
 		private FileExtensions extension;
 		private string fileLocation;
 		// Public vars
-		public bool finished;
+		public bool finished = false;
 		public StringBuilder LogBuilder;
 		public Label updateLabel, statusLabel;
 		public YouTubeVideo video;

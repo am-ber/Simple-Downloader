@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using MediaToolkit;
 using MediaToolkit.Model;
@@ -22,8 +19,8 @@ namespace Video_Downloader
 		private bool forceStop;
 		private bool convertAfter;
 		private FileExtensions extension;
-		private string fileLocation;
 		// Public vars
+		public string fileLocation;
 		public bool finished = false;
 		public StringBuilder LogBuilder;
 		public Label updateLabel, statusLabel;
@@ -151,7 +148,7 @@ namespace Video_Downloader
 
 		private void RunConvert(string fileLocation, string extension)
 		{
-			LogBuilder.Append("\nRunning job for conversion");
+			LogBuilder.Append("\n\tRunning job for conversion");
 			try
 			{
 				statusLabel.Invoke(new Action(() =>
@@ -173,6 +170,7 @@ namespace Video_Downloader
 
 					engine.ConvertProgressEvent += (sender, args) =>
 					{
+						LogBuilder.Append($"\n\tDuration: {args.TotalDuration}");
 						updateLabel.Invoke(new Action((() =>
 						{
 							updateLabel.Text = string.Concat(args.ProcessedDuration.Minutes, ":", args.ProcessedDuration.Seconds);
@@ -189,7 +187,7 @@ namespace Video_Downloader
 			{
 				LogBuilder.Append($"\n\tSomething happened during execution of conversion job:\n\t{e.Message}");
 			}
-
+			LogBuilder.Append($"\n\tFinished conversion of {fileLocation}");
 			if (runnable != null)
 				runnable(LogBuilder.ToString());
 		}

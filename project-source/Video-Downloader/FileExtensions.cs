@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Video_Downloader
+﻿namespace Video_Downloader
 {
 	public class FileExtensions
 	{
 		public string value { get; }
-
 		#region constants
 		// update as needed from:
 		// https://github.com/AydinAdn/MediaToolkit/wiki/Supported-file-formats

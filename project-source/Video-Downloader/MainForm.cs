@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using Newtonsoft.Json;
@@ -40,7 +36,7 @@ namespace Video_Downloader
 			agents = new List<Agent>();
 			InitializeComponent();
 			InitConvertFilterBuilder();
-			Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 0, 0));
+			Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 0, 0));
 		}
 		private void MainForm_Load(object sender, EventArgs e)
 		{
@@ -64,13 +60,13 @@ namespace Video_Downloader
 		}
 		private void InitConvertFilterBuilder()
 		{
-			convertExtensionFilterBuilder = new StringBuilder("Audio Files|");
-			foreach (string extension in FileExtensions.AudioFormats)
+			convertExtensionFilterBuilder = new StringBuilder("Video Files|");
+			foreach (string extension in FileExtensions.VideoFormats)
 			{
 				convertExtensionFilterBuilder.Append($"*{extension};");
 			}
-			convertExtensionFilterBuilder.Append("|Video Files|");
-			foreach (string extension in FileExtensions.VideoFormats)
+			convertExtensionFilterBuilder.Append("|Audio Files|");
+			foreach (string extension in FileExtensions.AudioFormats)
 			{
 				convertExtensionFilterBuilder.Append($"*{extension};");
 			}
@@ -309,10 +305,11 @@ namespace Video_Downloader
 		}
 		private void AddJobRow(Agent agent, TableLayoutPanel panel)
 		{
-			Label titleLabel = new Label()
-			{
-				Text = agent.video.FullName
-			};
+			Label titleLabel = new Label();
+			if (agent.video != null)
+				titleLabel.Text = agent.video.FullName;
+			else
+				titleLabel.Text = agent.fileLocation;
 			Label percentLable = new Label()
 			{
 				Text = "0%"
@@ -330,12 +327,15 @@ namespace Video_Downloader
 			};
 			forceEndButton.Click += ((sender, args) =>
 			{
-				agent.ForceStop();
-				forceEndButton.Visible = false;
-				statusLabel.Text = "Canceled";
-				titleLabel.ForeColor = Color.FromArgb(255, 118, 117);
-				statusLabel.ForeColor = Color.FromArgb(255, 118, 117);
-				percentLable.ForeColor = Color.FromArgb(255, 118, 117);
+				if (!agent.finished)
+				{
+					agent.ForceStop();
+					forceEndButton.Visible = false;
+					statusLabel.Text = "Canceled";
+					titleLabel.ForeColor = Color.FromArgb(255, 118, 117);
+					statusLabel.ForeColor = Color.FromArgb(255, 118, 117);
+					percentLable.ForeColor = Color.FromArgb(255, 118, 117);
+				}
 			});
 			panel.RowCount = panel.RowCount + 1;
 			panel.Controls.Add(titleLabel, 0, panel.RowCount - 1);

@@ -10,8 +10,31 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MediaToolkit" Version="1.1.0.1" />
-    <PackageReference Include="VideoLibrary" Version="3.1.2" />
+    <None Remove="lib\libvideo.dll" />
+    <None Remove="lib\MediaToolkit.dll" />
+    <None Remove="lib\Newtonsoft.Json.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="lib\libvideo.dll" />
+    <EmbeddedResource Include="lib\MediaToolkit.dll" />
+    <EmbeddedResource Include="lib\Newtonsoft.Json.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ILMerge" Version="3.0.41" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="libvideo">
+      <HintPath>lib\libvideo.dll</HintPath>
+    </Reference>
+    <Reference Include="MediaToolkit">
+      <HintPath>lib\MediaToolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>lib\Newtonsoft.Json.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
   <ItemGroup>
@@ -24,12 +47,21 @@
       <SubType>Component</SubType>
     </Compile>
   </ItemGroup>
-
-  <ItemGroup>
+	<ItemGroup>
     <EmbeddedResource Update="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-
+<Target Name="ILMerge">
+	<!-- the ILMergePath property points to the location of ILMerge.exe console application -->
+	<Exec Command="$(ILMergeConsolePath) bin\Debug\net5.0-windows\Video-Downloader.exe ^
+	  /out:bin\Debug\net5.0-windows\Downloader.dll ^
+bin\Debug\net5.0-windows\Video-Downloader.dll ^
+bin\Debug\net5.0-windows\MediaToolkit.dll ^
+bin\Debug\net5.0-windows\Newtonsoft.Json.dll ^
+bin\Debug\net5.0-windows\Video-Downloader.runtimeconfig.dev.json ^
+bin\Debug\net5.0-windows\Video-Downloader.runtimeconfig.json ^
+bin\Debug\net5.0-windows\Video-Downloader.deps.json" />
+</Target>
 </Project>

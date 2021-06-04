@@ -24,14 +24,19 @@ namespace Video_Downloader
 		public bool finished = false;
 		public StringBuilder LogBuilder;
 		public Label updateLabel, statusLabel;
-		public YouTubeVideo video;
+		public VideoTuple video;
+		public struct VideoTuple
+		{
+			public YouTubeVideo video { get; set; }
+			public YouTubeVideo audio { get; set; }
+		}
 		public Agent(params object[] things)
 		{
 			foreach (object thing in things)
 			{
-				if (thing.GetType().IsEquivalentTo(typeof(YouTubeVideo)))
+				if (thing.GetType().IsEquivalentTo(typeof(VideoTuple)))
 				{
-					video = thing as YouTubeVideo;
+					video = (VideoTuple) thing;
 					continue;
 				}
 				if (thing.GetType().IsEquivalentTo(typeof(Settings)))
@@ -52,11 +57,12 @@ namespace Video_Downloader
 				if (thing.GetType().IsEquivalentTo(typeof(string)))
 				{
 					fileLocation = (string) thing;
+					continue;
 				}
 			}
 			LogBuilder = new StringBuilder("\n---------------------\nInitializing job.");
 
-			if (video != null)
+			if (video.video != null)
 				routine = new Thread(new ThreadStart(() => RunDownload()));
 			else
 				routine = new Thread(new ThreadStart(() => RunConvert(fileLocation, extension.value)));
@@ -84,10 +90,10 @@ namespace Video_Downloader
 			{
 				HttpClient client = new HttpClient();
 				long? totalByte = 0;
-				using (Stream output = File.OpenWrite(string.Concat(settings.DownloadLocation, @"\", video.FullName)))
+				using (Stream output = File.OpenWrite(string.Concat(settings.DownloadLocation, @"\", video.video.FullName)))
 				{
 					// video
-					using (HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Head, video.Uri))
+					using (HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Head, video.video.Uri))
 					{
 						totalByte = client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).Result.Content
 							.Headers.ContentLength;
@@ -96,7 +102,7 @@ namespace Video_Downloader
 					LogBuilder.Append("\nTotal bytes: " + totalByte);
 					int totalRead = 0;
 					// video
-					using (Stream videoInput = video.Stream())
+					using (Stream videoInput = video.video.Stream())
 					{
 						// 16 kilobyte buffer
 						byte[] buffer = new byte[16 * 1024];
@@ -130,7 +136,7 @@ namespace Video_Downloader
 			{
 				LogBuilder.Append($"\n\tSomething happened during execution of job:\n\t{e.Message}");
 			}
-			LogBuilder.Append($"\nFinished downloading for:\n{video.FullName}");
+			LogBuilder.Append($"\nFinished downloading for:\n{video.video.FullName}");
 			statusLabel.Invoke(new Action(() =>
 			{
 				statusLabel.Text = "Completed";
@@ -141,8 +147,8 @@ namespace Video_Downloader
 				runnable(LogBuilder.ToString());
 			if (convertAfter)
 			{
-				RunConvert(Path.Combine(settings.DownloadLocation, video.FullName), FileExtensions.mp3);
-				File.Delete(Path.Combine(settings.DownloadLocation, video.FullName));
+				RunConvert(Path.Combine(settings.DownloadLocation, video.video.FullName), FileExtensions.mp3);
+				File.Delete(Path.Combine(settings.DownloadLocation, video.video.FullName));
 			}
 		}
 

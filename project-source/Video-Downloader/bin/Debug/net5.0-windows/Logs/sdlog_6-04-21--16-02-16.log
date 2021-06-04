@@ -1,0 +1,17 @@
+Simple Downloader starting execution(06/04/2021 16:02:16)...
+	User toggled logging.
+Updating settings file.
+	System.Windows.Forms.Button, Text: Convert Button pressed
+	System.Windows.Forms.Button, Text: Select File Button pressed
+	System.Windows.Forms.Button, Text: Start Conversion Button pressed
+
+---------------------
+Initializing job.
+	Starting job at (06/04/2021 16:02:43)
+	Running job for conversion
+	Finished conversion of E:\Downloads\memememes.mp4
+	System.Windows.Forms.Button, Text: Settings Button pressed
+	System.Windows.Forms.Button, Text: Download Button pressed
+	System.Windows.Forms.Button, Text: X Button pressed
+Updating settings file.
+Ending Execution... (06/04/2021 16:03:41)

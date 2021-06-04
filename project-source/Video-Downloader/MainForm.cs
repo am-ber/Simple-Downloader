@@ -306,8 +306,8 @@ namespace Video_Downloader
 		private void AddJobRow(Agent agent, TableLayoutPanel panel)
 		{
 			Label titleLabel = new Label();
-			if (agent.video != null)
-				titleLabel.Text = agent.video.FullName;
+			if (agent.video.video != null)
+				titleLabel.Text = agent.video.video.FullName;
 			else
 				titleLabel.Text = agent.fileLocation;
 			Label percentLable = new Label()

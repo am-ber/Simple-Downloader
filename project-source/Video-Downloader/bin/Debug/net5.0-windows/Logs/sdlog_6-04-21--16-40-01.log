@@ -1,0 +1,18 @@
+Simple Downloader starting execution(06/04/2021 16:40:01)...
+	User toggled logging.
+Updating settings file.
+	System.Windows.Forms.Button, Text: Convert Button pressed
+	System.Windows.Forms.Button, Text: Settings Button pressed
+	System.Windows.Forms.Button, Text: Download Button pressed
+	System.Windows.Forms.Button, Text: Download Button pressed
+
+---------------------
+Initializing job.
+	Starting job at (06/04/2021 16:40:24)
+Running job for regular video download.
+Total bytes: 15929856
+Finished downloading for:
+Rick Astley - Never Gonna Give You Up (Video).mp4
+	System.Windows.Forms.Button, Text: X Button pressed
+Updating settings file.
+Ending Execution... (06/04/2021 16:40:35)

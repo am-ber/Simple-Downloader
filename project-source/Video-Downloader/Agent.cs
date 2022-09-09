@@ -17,7 +17,6 @@ namespace Video_Downloader
 		private Settings settings;
 		private RunAfterFinished runnable;
 		private bool forceStop;
-		private bool convertAfter;
 		private FileExtensions extension;
 		// Public vars
 		public string fileLocation;
@@ -44,11 +43,6 @@ namespace Video_Downloader
 					settings = thing as Settings;
 					continue;
 				}
-				if (thing.GetType().IsEquivalentTo(typeof(bool)))
-				{
-					convertAfter = (bool) thing;
-					continue;
-				}
 				if (thing.GetType().IsEquivalentTo(typeof(FileExtensions)))
 				{
 					extension = (FileExtensions) thing;
@@ -64,8 +58,6 @@ namespace Video_Downloader
 
 			if (video.video != null)
 				routine = new Thread(new ThreadStart(() => RunDownload()));
-			else
-				routine = new Thread(new ThreadStart(() => RunConvert(fileLocation, extension.value)));
 		}
 		public delegate void RunAfterFinished(string input);
 		public void Start(Label updateLabel, Label statusLabel, RunAfterFinished runnable = null)
@@ -145,59 +137,7 @@ namespace Video_Downloader
 
 			if (runnable != null)
 				runnable(LogBuilder.ToString());
-			if (convertAfter)
-			{
-				RunConvert(Path.Combine(settings.DownloadLocation, video.video.FullName), FileExtensions.mp3);
-				File.Delete(Path.Combine(settings.DownloadLocation, video.video.FullName));
-			}
 		}
-
-		private void RunConvert(string fileLocation, string extension)
-		{
-			LogBuilder.Append("\n\tRunning job for conversion");
-			try
-			{
-				statusLabel.Invoke(new Action(() =>
-				{
-					statusLabel.Text = "Converting";
-				}));
-				MediaFile inputFile = new MediaFile()
-				{
-					Filename = fileLocation
-				};
-				MediaFile outputFile = new MediaFile()
-				{
-					Filename = string.Concat(fileLocation, extension)
-				};
-
-				using (Engine engine = new Engine())
-				{
-					engine.GetMetadata(inputFile);
-
-					engine.ConvertProgressEvent += (sender, args) =>
-					{
-						LogBuilder.Append($"\n\tDuration: {args.TotalDuration}");
-						updateLabel.Invoke(new Action((() =>
-						{
-							updateLabel.Text = string.Concat(args.ProcessedDuration.Minutes, ":", args.ProcessedDuration.Seconds);
-						})));
-					};
-					engine.Convert(inputFile, outputFile);
-				}
-				statusLabel.Invoke(new Action(() =>
-				{
-					statusLabel.Text = "Converted";
-				}));
-			}
-			catch (Exception e)
-			{
-				LogBuilder.Append($"\n\tSomething happened during execution of conversion job:\n\t{e.Message}");
-			}
-			LogBuilder.Append($"\n\tFinished conversion of {fileLocation}");
-			if (runnable != null)
-				runnable(LogBuilder.ToString());
-		}
-
 		public void Stop()
 		{
 			if (routine != null)

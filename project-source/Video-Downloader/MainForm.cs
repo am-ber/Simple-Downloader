@@ -46,17 +46,11 @@ namespace Video_Downloader
 		}
 		private void InitFormControllers()
 		{
-			formatDownloadComboBox.Items.Add(".mp4");
 			formatDownloadComboBox.Items.Add(".mp3");
 			formatDownloadComboBox.Text = settings.LastExtension;
 			downloadLocationTextBox.Text = settings.DownloadLocation;
 			linkTextBox.Text = settings.LastVideoDownloaded;
-			convertOutputLocationTextBox.Text = settings.DownloadLocation;
 			loggingCheckBox.Checked = settings.LogThings;
-
-			convertExtensionComboBox.Items.AddRange(FileExtensions.AudioFormats);
-			convertExtensionComboBox.Items.AddRange(FileExtensions.VideoFormats);
-			convertExtensionComboBox.Text = FileExtensions.mp3;
 		}
 		private void InitConvertFilterBuilder()
 		{
@@ -163,47 +157,6 @@ namespace Video_Downloader
 			Program.Log($"\t{sender} Button pressed");
 			WindowState = FormWindowState.Minimized;
 		}
-		private void convertInputSelectFileButtonClick(object sender, EventArgs e)
-		{
-			Program.Log($"\t{sender} Button pressed");
-			OpenFileDialog dialog = new OpenFileDialog()
-			{
-				Filter = convertExtensionFilterBuilder.ToString(),
-				InitialDirectory = settings.DownloadLocation,
-				Title = "Select a file to convert."
-			};
-			if (dialog.ShowDialog() == DialogResult.OK)
-			{
-				convertInputFileLocationTextBox.Text = dialog.FileName;
-			}
-		}
-		private void convertOutputLocationButtonClick(object sender, EventArgs e)
-		{
-			Program.Log($"\t{sender} Button pressed");
-			using (FolderBrowserDialog folderDialog = new FolderBrowserDialog())
-			{
-				DialogResult result = folderDialog.ShowDialog();
-
-				if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(folderDialog.SelectedPath))
-				{
-					convertOutputLocationTextBox.Text = folderDialog.SelectedPath;
-				}
-			}
-		}
-		private void convertStartButtonClick(object sender, EventArgs e)
-		{
-			Program.Log($"\t{sender} Button pressed");
-			try
-			{
-				AddJobRow(new Agent(convertInputFileLocationTextBox.Text,
-						new FileExtensions(convertExtensionComboBox.Text)),
-					convertJobTable);
-			}
-			catch (Exception ex)
-			{
-				DisplayError($"***shruging***\n{ex.Message}");
-			}
-		}
 		#endregion
 		private void downloadLocationTextBox_KeyDown(object sender, KeyEventArgs e)
 		{
@@ -255,12 +208,6 @@ namespace Video_Downloader
 			if (activator.Equals(settingsButton))
 			{
 				ContentPanelHandler(settingsTab);
-				return;
-			}
-
-			if (activator.Equals(convertNavButton))
-			{
-				ContentPanelHandler(convertTab);
 				return;
 			}
 		}

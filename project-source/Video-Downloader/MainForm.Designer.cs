@@ -57,29 +57,9 @@ namespace Video_Downloader
 			this.errorTitlePanel = new System.Windows.Forms.Panel();
 			this.errorTitle = new System.Windows.Forms.Label();
 			this.errorCloseButton = new System.Windows.Forms.Button();
-			this.convertTab = new System.Windows.Forms.TabPage();
-			this.convertContentPanel = new System.Windows.Forms.Panel();
-			this.convertOutputPanel = new System.Windows.Forms.Panel();
-			this.convertStartButton = new System.Windows.Forms.Button();
-			this.convertExtensionComboBox = new System.Windows.Forms.ComboBox();
-			this.convertOutputLocationPanel = new System.Windows.Forms.Panel();
-			this.convertOutputLocationButton = new System.Windows.Forms.Button();
-			this.convertOutputLocationTextBox = new System.Windows.Forms.TextBox();
-			this.convertOutputLabel = new System.Windows.Forms.Label();
-			this.convertInputPanel = new System.Windows.Forms.Panel();
-			this.convertInputLocationPanel = new System.Windows.Forms.Panel();
-			this.convertInputSelectFileButton = new System.Windows.Forms.Button();
-			this.convertInputFileLocationTextBox = new System.Windows.Forms.TextBox();
-			this.convertInputLabel = new System.Windows.Forms.Label();
-			this.convertJobTable = new System.Windows.Forms.TableLayoutPanel();
-			this.convertJobStatusLabel = new System.Windows.Forms.Label();
-			this.convertJobTimeLabel = new System.Windows.Forms.Label();
-			this.convertJobTitleLabel = new System.Windows.Forms.Label();
-			this.convertJobCancelLabel = new System.Windows.Forms.Label();
 			this.leftMenuPanel = new System.Windows.Forms.Panel();
 			this.buttonContainer = new System.Windows.Forms.Panel();
 			this.settingsButton = new System.Windows.Forms.Button();
-			this.convertNavButton = new System.Windows.Forms.Button();
 			this.panelNav = new System.Windows.Forms.Panel();
 			this.downloadButton = new System.Windows.Forms.Button();
 			this.iconTitlePanel = new System.Windows.Forms.Panel();
@@ -101,13 +81,6 @@ namespace Video_Downloader
 			this.errorTab.SuspendLayout();
 			this.errorContentPanel.SuspendLayout();
 			this.errorTitlePanel.SuspendLayout();
-			this.convertTab.SuspendLayout();
-			this.convertContentPanel.SuspendLayout();
-			this.convertOutputPanel.SuspendLayout();
-			this.convertOutputLocationPanel.SuspendLayout();
-			this.convertInputPanel.SuspendLayout();
-			this.convertInputLocationPanel.SuspendLayout();
-			this.convertJobTable.SuspendLayout();
 			this.leftMenuPanel.SuspendLayout();
 			this.buttonContainer.SuspendLayout();
 			this.iconTitlePanel.SuspendLayout();
@@ -123,7 +96,6 @@ namespace Video_Downloader
 			this.contentTabController.Controls.Add(this.downloadTab);
 			this.contentTabController.Controls.Add(this.settingsTab);
 			this.contentTabController.Controls.Add(this.errorTab);
-			this.contentTabController.Controls.Add(this.convertTab);
 			this.contentTabController.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.contentTabController.Font = new System.Drawing.Font("Segoe UI", 1.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
 			this.contentTabController.ItemSize = new System.Drawing.Size(0, 1);
@@ -287,15 +259,9 @@ namespace Video_Downloader
 			// 
 			// formatDownloadComboBox
 			// 
-			this.formatDownloadComboBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(190)))), ((int)(((byte)(195)))));
-			this.formatDownloadComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.formatDownloadComboBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.formatDownloadComboBox.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-			this.formatDownloadComboBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(52)))), ((int)(((byte)(54)))));
-			this.formatDownloadComboBox.FormattingEnabled = true;
-			this.formatDownloadComboBox.Location = new System.Drawing.Point(486, 1);
+			this.formatDownloadComboBox.Location = new System.Drawing.Point(0, 0);
 			this.formatDownloadComboBox.Name = "formatDownloadComboBox";
-			this.formatDownloadComboBox.Size = new System.Drawing.Size(55, 26);
+			this.formatDownloadComboBox.Size = new System.Drawing.Size(121, 11);
 			this.formatDownloadComboBox.TabIndex = 2;
 			// 
 			// settingsTab
@@ -483,264 +449,6 @@ namespace Video_Downloader
 			this.errorCloseButton.UseVisualStyleBackColor = true;
 			this.errorCloseButton.Click += new System.EventHandler(this.errorCloseButton_Click);
 			// 
-			// convertTab
-			// 
-			this.convertTab.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(99)))), ((int)(((byte)(110)))), ((int)(((byte)(114)))));
-			this.convertTab.Controls.Add(this.convertContentPanel);
-			this.convertTab.Controls.Add(this.convertJobTable);
-			this.convertTab.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-			this.convertTab.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(230)))), ((int)(((byte)(233)))));
-			this.convertTab.Location = new System.Drawing.Point(4, 5);
-			this.convertTab.Name = "convertTab";
-			this.convertTab.Padding = new System.Windows.Forms.Padding(3);
-			this.convertTab.Size = new System.Drawing.Size(642, 553);
-			this.convertTab.TabIndex = 3;
-			// 
-			// convertContentPanel
-			// 
-			this.convertContentPanel.Controls.Add(this.convertOutputPanel);
-			this.convertContentPanel.Controls.Add(this.convertInputPanel);
-			this.convertContentPanel.Dock = System.Windows.Forms.DockStyle.Top;
-			this.convertContentPanel.Location = new System.Drawing.Point(3, 3);
-			this.convertContentPanel.Name = "convertContentPanel";
-			this.convertContentPanel.Size = new System.Drawing.Size(636, 244);
-			this.convertContentPanel.TabIndex = 4;
-			// 
-			// convertOutputPanel
-			// 
-			this.convertOutputPanel.Controls.Add(this.convertStartButton);
-			this.convertOutputPanel.Controls.Add(this.convertExtensionComboBox);
-			this.convertOutputPanel.Controls.Add(this.convertOutputLocationPanel);
-			this.convertOutputPanel.Controls.Add(this.convertOutputLabel);
-			this.convertOutputPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.convertOutputPanel.Location = new System.Drawing.Point(0, 63);
-			this.convertOutputPanel.Name = "convertOutputPanel";
-			this.convertOutputPanel.Size = new System.Drawing.Size(636, 181);
-			this.convertOutputPanel.TabIndex = 1;
-			// 
-			// convertStartButton
-			// 
-			this.convertStartButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(52)))), ((int)(((byte)(54)))));
-			this.convertStartButton.FlatAppearance.BorderSize = 0;
-			this.convertStartButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.convertStartButton.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-			this.convertStartButton.Location = new System.Drawing.Point(105, 88);
-			this.convertStartButton.Margin = new System.Windows.Forms.Padding(0);
-			this.convertStartButton.Name = "convertStartButton";
-			this.convertStartButton.Size = new System.Drawing.Size(129, 27);
-			this.convertStartButton.TabIndex = 4;
-			this.convertStartButton.Text = "Start Conversion";
-			this.convertStartButton.UseVisualStyleBackColor = false;
-			this.convertStartButton.Click += new System.EventHandler(this.convertStartButtonClick);
-			// 
-			// convertExtensionComboBox
-			// 
-			this.convertExtensionComboBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(190)))), ((int)(((byte)(195)))));
-			this.convertExtensionComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.convertExtensionComboBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.convertExtensionComboBox.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-			this.convertExtensionComboBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(52)))), ((int)(((byte)(54)))));
-			this.convertExtensionComboBox.FormattingEnabled = true;
-			this.convertExtensionComboBox.Location = new System.Drawing.Point(13, 88);
-			this.convertExtensionComboBox.Name = "convertExtensionComboBox";
-			this.convertExtensionComboBox.Size = new System.Drawing.Size(64, 26);
-			this.convertExtensionComboBox.TabIndex = 3;
-			// 
-			// convertOutputLocationPanel
-			// 
-			this.convertOutputLocationPanel.Controls.Add(this.convertOutputLocationButton);
-			this.convertOutputLocationPanel.Controls.Add(this.convertOutputLocationTextBox);
-			this.convertOutputLocationPanel.Dock = System.Windows.Forms.DockStyle.Top;
-			this.convertOutputLocationPanel.Location = new System.Drawing.Point(0, 31);
-			this.convertOutputLocationPanel.Name = "convertOutputLocationPanel";
-			this.convertOutputLocationPanel.Size = new System.Drawing.Size(636, 27);
-			this.convertOutputLocationPanel.TabIndex = 2;
-			// 
-			// convertOutputLocationButton
-			// 
-			this.convertOutputLocationButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(52)))), ((int)(((byte)(54)))));
-			this.convertOutputLocationButton.Dock = System.Windows.Forms.DockStyle.Right;
-			this.convertOutputLocationButton.FlatAppearance.BorderSize = 0;
-			this.convertOutputLocationButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.convertOutputLocationButton.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-			this.convertOutputLocationButton.Location = new System.Drawing.Point(536, 0);
-			this.convertOutputLocationButton.Margin = new System.Windows.Forms.Padding(0);
-			this.convertOutputLocationButton.Name = "convertOutputLocationButton";
-			this.convertOutputLocationButton.Size = new System.Drawing.Size(100, 27);
-			this.convertOutputLocationButton.TabIndex = 1;
-			this.convertOutputLocationButton.Text = "Select Folder";
-			this.convertOutputLocationButton.UseVisualStyleBackColor = false;
-			this.convertOutputLocationButton.Click += new System.EventHandler(this.convertOutputLocationButtonClick);
-			// 
-			// convertOutputLocationTextBox
-			// 
-			this.convertOutputLocationTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(190)))), ((int)(((byte)(195)))));
-			this.convertOutputLocationTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-			this.convertOutputLocationTextBox.Dock = System.Windows.Forms.DockStyle.Left;
-			this.convertOutputLocationTextBox.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-			this.convertOutputLocationTextBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(52)))), ((int)(((byte)(54)))));
-			this.convertOutputLocationTextBox.Location = new System.Drawing.Point(0, 0);
-			this.convertOutputLocationTextBox.Name = "convertOutputLocationTextBox";
-			this.convertOutputLocationTextBox.Size = new System.Drawing.Size(523, 26);
-			this.convertOutputLocationTextBox.TabIndex = 0;
-			this.convertOutputLocationTextBox.Text = "Output Folder Location";
-			// 
-			// convertOutputLabel
-			// 
-			this.convertOutputLabel.Dock = System.Windows.Forms.DockStyle.Top;
-			this.convertOutputLabel.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-			this.convertOutputLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(52)))), ((int)(((byte)(54)))));
-			this.convertOutputLabel.Location = new System.Drawing.Point(0, 0);
-			this.convertOutputLabel.Name = "convertOutputLabel";
-			this.convertOutputLabel.Size = new System.Drawing.Size(636, 31);
-			this.convertOutputLabel.TabIndex = 1;
-			this.convertOutputLabel.Text = "Output";
-			this.convertOutputLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			// 
-			// convertInputPanel
-			// 
-			this.convertInputPanel.Controls.Add(this.convertInputLocationPanel);
-			this.convertInputPanel.Controls.Add(this.convertInputLabel);
-			this.convertInputPanel.Dock = System.Windows.Forms.DockStyle.Top;
-			this.convertInputPanel.Location = new System.Drawing.Point(0, 0);
-			this.convertInputPanel.Name = "convertInputPanel";
-			this.convertInputPanel.Size = new System.Drawing.Size(636, 60);
-			this.convertInputPanel.TabIndex = 0;
-			// 
-			// convertInputLocationPanel
-			// 
-			this.convertInputLocationPanel.Controls.Add(this.convertInputSelectFileButton);
-			this.convertInputLocationPanel.Controls.Add(this.convertInputFileLocationTextBox);
-			this.convertInputLocationPanel.Dock = System.Windows.Forms.DockStyle.Top;
-			this.convertInputLocationPanel.Location = new System.Drawing.Point(0, 31);
-			this.convertInputLocationPanel.Name = "convertInputLocationPanel";
-			this.convertInputLocationPanel.Size = new System.Drawing.Size(636, 27);
-			this.convertInputLocationPanel.TabIndex = 1;
-			// 
-			// convertInputSelectFileButton
-			// 
-			this.convertInputSelectFileButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(52)))), ((int)(((byte)(54)))));
-			this.convertInputSelectFileButton.Dock = System.Windows.Forms.DockStyle.Right;
-			this.convertInputSelectFileButton.FlatAppearance.BorderSize = 0;
-			this.convertInputSelectFileButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.convertInputSelectFileButton.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-			this.convertInputSelectFileButton.Location = new System.Drawing.Point(548, 0);
-			this.convertInputSelectFileButton.Margin = new System.Windows.Forms.Padding(0);
-			this.convertInputSelectFileButton.Name = "convertInputSelectFileButton";
-			this.convertInputSelectFileButton.Size = new System.Drawing.Size(88, 27);
-			this.convertInputSelectFileButton.TabIndex = 1;
-			this.convertInputSelectFileButton.Text = "Select File";
-			this.convertInputSelectFileButton.UseVisualStyleBackColor = false;
-			this.convertInputSelectFileButton.Click += new System.EventHandler(this.convertInputSelectFileButtonClick);
-			// 
-			// convertInputFileLocationTextBox
-			// 
-			this.convertInputFileLocationTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(190)))), ((int)(((byte)(195)))));
-			this.convertInputFileLocationTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-			this.convertInputFileLocationTextBox.Dock = System.Windows.Forms.DockStyle.Left;
-			this.convertInputFileLocationTextBox.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-			this.convertInputFileLocationTextBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(52)))), ((int)(((byte)(54)))));
-			this.convertInputFileLocationTextBox.Location = new System.Drawing.Point(0, 0);
-			this.convertInputFileLocationTextBox.Name = "convertInputFileLocationTextBox";
-			this.convertInputFileLocationTextBox.Size = new System.Drawing.Size(523, 26);
-			this.convertInputFileLocationTextBox.TabIndex = 0;
-			this.convertInputFileLocationTextBox.Text = "Input File Location";
-			// 
-			// convertInputLabel
-			// 
-			this.convertInputLabel.Dock = System.Windows.Forms.DockStyle.Top;
-			this.convertInputLabel.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-			this.convertInputLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(52)))), ((int)(((byte)(54)))));
-			this.convertInputLabel.Location = new System.Drawing.Point(0, 0);
-			this.convertInputLabel.Name = "convertInputLabel";
-			this.convertInputLabel.Size = new System.Drawing.Size(636, 31);
-			this.convertInputLabel.TabIndex = 0;
-			this.convertInputLabel.Text = "Input";
-			this.convertInputLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			// 
-			// convertJobTable
-			// 
-			this.convertJobTable.AutoScroll = true;
-			this.convertJobTable.BackColor = System.Drawing.Color.Transparent;
-			this.convertJobTable.ColumnCount = 4;
-			this.convertJobTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 360F));
-			this.convertJobTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
-			this.convertJobTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
-			this.convertJobTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 76F));
-			this.convertJobTable.Controls.Add(this.convertJobStatusLabel, 2, 0);
-			this.convertJobTable.Controls.Add(this.convertJobTimeLabel, 1, 0);
-			this.convertJobTable.Controls.Add(this.convertJobTitleLabel, 0, 0);
-			this.convertJobTable.Controls.Add(this.convertJobCancelLabel, 3, 0);
-			this.convertJobTable.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.convertJobTable.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-			this.convertJobTable.Location = new System.Drawing.Point(3, 250);
-			this.convertJobTable.Margin = new System.Windows.Forms.Padding(0);
-			this.convertJobTable.MinimumSize = new System.Drawing.Size(622, 300);
-			this.convertJobTable.Name = "convertJobTable";
-			this.convertJobTable.RowCount = 2;
-			this.convertJobTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
-			this.convertJobTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-			this.convertJobTable.Size = new System.Drawing.Size(636, 300);
-			this.convertJobTable.TabIndex = 3;
-			// 
-			// convertJobStatusLabel
-			// 
-			this.convertJobStatusLabel.AutoSize = true;
-			this.convertJobStatusLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(52)))), ((int)(((byte)(54)))));
-			this.convertJobStatusLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.convertJobStatusLabel.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-			this.convertJobStatusLabel.Location = new System.Drawing.Point(440, 0);
-			this.convertJobStatusLabel.Margin = new System.Windows.Forms.Padding(0);
-			this.convertJobStatusLabel.Name = "convertJobStatusLabel";
-			this.convertJobStatusLabel.Size = new System.Drawing.Size(120, 32);
-			this.convertJobStatusLabel.TabIndex = 2;
-			this.convertJobStatusLabel.Text = "Status";
-			this.convertJobStatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			// 
-			// convertJobTimeLabel
-			// 
-			this.convertJobTimeLabel.AutoSize = true;
-			this.convertJobTimeLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(52)))), ((int)(((byte)(54)))));
-			this.convertJobTimeLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.convertJobTimeLabel.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-			this.convertJobTimeLabel.Location = new System.Drawing.Point(360, 0);
-			this.convertJobTimeLabel.Margin = new System.Windows.Forms.Padding(0);
-			this.convertJobTimeLabel.Name = "convertJobTimeLabel";
-			this.convertJobTimeLabel.Size = new System.Drawing.Size(80, 32);
-			this.convertJobTimeLabel.TabIndex = 1;
-			this.convertJobTimeLabel.Text = "Time";
-			this.convertJobTimeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			// 
-			// convertJobTitleLabel
-			// 
-			this.convertJobTitleLabel.AutoSize = true;
-			this.convertJobTitleLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(52)))), ((int)(((byte)(54)))));
-			this.convertJobTitleLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.convertJobTitleLabel.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-			this.convertJobTitleLabel.Location = new System.Drawing.Point(0, 0);
-			this.convertJobTitleLabel.Margin = new System.Windows.Forms.Padding(0);
-			this.convertJobTitleLabel.Name = "convertJobTitleLabel";
-			this.convertJobTitleLabel.Size = new System.Drawing.Size(360, 32);
-			this.convertJobTitleLabel.TabIndex = 0;
-			this.convertJobTitleLabel.Text = "File Name";
-			this.convertJobTitleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			// 
-			// convertJobCancelLabel
-			// 
-			this.convertJobCancelLabel.AutoSize = true;
-			this.convertJobCancelLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(52)))), ((int)(((byte)(54)))));
-			this.convertJobCancelLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.convertJobCancelLabel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.convertJobCancelLabel.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-			this.convertJobCancelLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(230)))), ((int)(((byte)(233)))));
-			this.convertJobCancelLabel.Location = new System.Drawing.Point(560, 0);
-			this.convertJobCancelLabel.Margin = new System.Windows.Forms.Padding(0);
-			this.convertJobCancelLabel.Name = "convertJobCancelLabel";
-			this.convertJobCancelLabel.Size = new System.Drawing.Size(76, 32);
-			this.convertJobCancelLabel.TabIndex = 3;
-			this.convertJobCancelLabel.Text = "Cancel";
-			this.convertJobCancelLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			// 
 			// leftMenuPanel
 			// 
 			this.leftMenuPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(52)))), ((int)(((byte)(54)))));
@@ -756,7 +464,6 @@ namespace Video_Downloader
 			// 
 			this.buttonContainer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(52)))), ((int)(((byte)(54)))));
 			this.buttonContainer.Controls.Add(this.settingsButton);
-			this.buttonContainer.Controls.Add(this.convertNavButton);
 			this.buttonContainer.Controls.Add(this.panelNav);
 			this.buttonContainer.Controls.Add(this.downloadButton);
 			this.buttonContainer.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -774,7 +481,7 @@ namespace Video_Downloader
 			this.settingsButton.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
 			this.settingsButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(190)))), ((int)(((byte)(195)))));
 			this.settingsButton.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-			this.settingsButton.Location = new System.Drawing.Point(0, 140);
+			this.settingsButton.Location = new System.Drawing.Point(0, 70);
 			this.settingsButton.MinimumSize = new System.Drawing.Size(190, 70);
 			this.settingsButton.Name = "settingsButton";
 			this.settingsButton.Size = new System.Drawing.Size(190, 70);
@@ -784,26 +491,6 @@ namespace Video_Downloader
 			this.settingsButton.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
 			this.settingsButton.UseVisualStyleBackColor = false;
 			this.settingsButton.Click += new System.EventHandler(this.NavButtonClick);
-			// 
-			// convertNavButton
-			// 
-			this.convertNavButton.BackColor = System.Drawing.Color.Transparent;
-			this.convertNavButton.Dock = System.Windows.Forms.DockStyle.Top;
-			this.convertNavButton.FlatAppearance.BorderSize = 0;
-			this.convertNavButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.convertNavButton.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-			this.convertNavButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(190)))), ((int)(((byte)(195)))));
-			this.convertNavButton.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-			this.convertNavButton.Location = new System.Drawing.Point(0, 70);
-			this.convertNavButton.MinimumSize = new System.Drawing.Size(190, 70);
-			this.convertNavButton.Name = "convertNavButton";
-			this.convertNavButton.Size = new System.Drawing.Size(190, 70);
-			this.convertNavButton.TabIndex = 3;
-			this.convertNavButton.Text = "Convert";
-			this.convertNavButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			this.convertNavButton.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
-			this.convertNavButton.UseVisualStyleBackColor = false;
-			this.convertNavButton.Click += new System.EventHandler(this.NavButtonClick);
 			// 
 			// panelNav
 			// 
@@ -960,16 +647,6 @@ namespace Video_Downloader
 			this.errorContentPanel.ResumeLayout(false);
 			this.errorContentPanel.PerformLayout();
 			this.errorTitlePanel.ResumeLayout(false);
-			this.convertTab.ResumeLayout(false);
-			this.convertContentPanel.ResumeLayout(false);
-			this.convertOutputPanel.ResumeLayout(false);
-			this.convertOutputLocationPanel.ResumeLayout(false);
-			this.convertOutputLocationPanel.PerformLayout();
-			this.convertInputPanel.ResumeLayout(false);
-			this.convertInputLocationPanel.ResumeLayout(false);
-			this.convertInputLocationPanel.PerformLayout();
-			this.convertJobTable.ResumeLayout(false);
-			this.convertJobTable.PerformLayout();
 			this.leftMenuPanel.ResumeLayout(false);
 			this.leftMenuPanel.PerformLayout();
 			this.buttonContainer.ResumeLayout(false);
@@ -990,7 +667,6 @@ namespace Video_Downloader
 		private System.Windows.Forms.Panel buttonContainer;
 		private System.Windows.Forms.Panel panelNav;
 		private System.Windows.Forms.Button settingsButton;
-		private System.Windows.Forms.Button downloadButton;
 		private System.Windows.Forms.Panel titlebarPanel;
 		private System.Windows.Forms.Button closeAppButton;
 		private System.Windows.Forms.Panel contentPanel;
@@ -1020,28 +696,9 @@ namespace Video_Downloader
 		private System.Windows.Forms.Label tableJobTitleLabel;
 		private System.Windows.Forms.Label forceCloseJobTableLabel;
 		private System.Windows.Forms.ComboBox formatDownloadComboBox;
-		private System.Windows.Forms.Button convertNavButton;
-		private System.Windows.Forms.TabPage convertTab;
-		private System.Windows.Forms.TableLayoutPanel convertJobTable;
-		private System.Windows.Forms.Label convertJobStatusLabel;
-		private System.Windows.Forms.Label convertJobTimeLabel;
-		private System.Windows.Forms.Label convertJobTitleLabel;
-		private System.Windows.Forms.Label convertJobCancelLabel;
-		private System.Windows.Forms.Panel convertContentPanel;
-		private System.Windows.Forms.Panel convertOutputPanel;
-		private System.Windows.Forms.Panel convertInputPanel;
-		private System.Windows.Forms.Label convertInputLabel;
-		private System.Windows.Forms.Label convertOutputLabel;
-		private System.Windows.Forms.Panel convertInputLocationPanel;
-		private System.Windows.Forms.Button convertInputSelectFileButton;
-		private System.Windows.Forms.TextBox convertInputFileLocationTextBox;
-		private System.Windows.Forms.Panel convertOutputLocationPanel;
-		private System.Windows.Forms.Button convertOutputLocationButton;
-		private System.Windows.Forms.TextBox convertOutputLocationTextBox;
 		private System.Windows.Forms.Label downloadLocationLabel;
 		private System.Windows.Forms.Label otherSettingsLabel;
-		private System.Windows.Forms.ComboBox convertExtensionComboBox;
-		private System.Windows.Forms.Button convertStartButton;
+		private System.Windows.Forms.Button downloadButton;
 	}
 }
 

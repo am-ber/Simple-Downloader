@@ -1,0 +1,76 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v5.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v5.0": {
+      "Video-Downloader/1.0.0": {
+        "dependencies": {
+          "ILMerge": "3.0.41",
+          "libvideo": "3.1.2.0",
+          "MediaToolkit": "1.1.0.1",
+          "Newtonsoft.Json": "12.0.0.0"
+        },
+        "runtime": {
+          "Video-Downloader.dll": {}
+        }
+      },
+      "ILMerge/3.0.41": {},
+      "libvideo/3.1.2.0": {
+        "runtime": {
+          "libvideo.dll": {
+            "assemblyVersion": "3.1.2.0",
+            "fileVersion": "3.1.2.0"
+          }
+        }
+      },
+      "MediaToolkit/1.1.0.1": {
+        "runtime": {
+          "MediaToolkit.dll": {
+            "assemblyVersion": "1.1.0.1",
+            "fileVersion": "1.1.0.1"
+          }
+        }
+      },
+      "Newtonsoft.Json/12.0.0.0": {
+        "runtime": {
+          "Newtonsoft.Json.dll": {
+            "assemblyVersion": "12.0.0.0",
+            "fileVersion": "12.0.3.23909"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Video-Downloader/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "ILMerge/3.0.41": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-u9n45xs40bSGoNFcmMYJkh3zkGYKR4BqzQaX2uHc2Ay4drdiQOTeo/1ECps3ttDXOu4Q6qbTnsIbQWb/06ShqA==",
+      "path": "ilmerge/3.0.41",
+      "hashPath": "ilmerge.3.0.41.nupkg.sha512"
+    },
+    "libvideo/3.1.2.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "MediaToolkit/1.1.0.1": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Newtonsoft.Json/12.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

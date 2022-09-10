@@ -41,7 +41,6 @@ namespace Video_Downloader
 			this.searchPanel = new System.Windows.Forms.Panel();
 			this.linkButton = new System.Windows.Forms.Button();
 			this.linkTextBox = new System.Windows.Forms.TextBox();
-			this.formatDownloadComboBox = new System.Windows.Forms.ComboBox();
 			this.settingsTab = new System.Windows.Forms.TabPage();
 			this.settingsPanel = new System.Windows.Forms.Panel();
 			this.downloadLocationLabel = new System.Windows.Forms.Label();
@@ -64,7 +63,6 @@ namespace Video_Downloader
 			this.downloadButton = new System.Windows.Forms.Button();
 			this.iconTitlePanel = new System.Windows.Forms.Panel();
 			this.icon = new System.Windows.Forms.PictureBox();
-			this.titleLable = new System.Windows.Forms.Label();
 			this.titlebarPanel = new System.Windows.Forms.Panel();
 			this.minimizeButton = new System.Windows.Forms.Button();
 			this.closeAppButton = new System.Windows.Forms.Button();
@@ -104,7 +102,7 @@ namespace Video_Downloader
 			this.contentTabController.Name = "contentTabController";
 			this.contentTabController.Padding = new System.Drawing.Point(0, 0);
 			this.contentTabController.SelectedIndex = 0;
-			this.contentTabController.Size = new System.Drawing.Size(650, 562);
+			this.contentTabController.Size = new System.Drawing.Size(653, 562);
 			this.contentTabController.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
 			this.contentTabController.TabIndex = 0;
 			this.contentTabController.TabStop = false;
@@ -118,7 +116,7 @@ namespace Video_Downloader
 			this.downloadTab.Margin = new System.Windows.Forms.Padding(0);
 			this.downloadTab.Name = "downloadTab";
 			this.downloadTab.Padding = new System.Windows.Forms.Padding(10);
-			this.downloadTab.Size = new System.Drawing.Size(642, 553);
+			this.downloadTab.Size = new System.Drawing.Size(645, 553);
 			this.downloadTab.TabIndex = 0;
 			// 
 			// downloadPanel
@@ -129,7 +127,7 @@ namespace Video_Downloader
 			this.downloadPanel.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.downloadPanel.Location = new System.Drawing.Point(10, 10);
 			this.downloadPanel.Name = "downloadPanel";
-			this.downloadPanel.Size = new System.Drawing.Size(622, 533);
+			this.downloadPanel.Size = new System.Drawing.Size(625, 533);
 			this.downloadPanel.TabIndex = 0;
 			// 
 			// jobTable
@@ -140,7 +138,7 @@ namespace Video_Downloader
 			this.jobTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 360F));
 			this.jobTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
 			this.jobTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
-			this.jobTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 62F));
+			this.jobTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 65F));
 			this.jobTable.Controls.Add(this.tableJobProgressLabel, 2, 0);
 			this.jobTable.Controls.Add(this.tableJobPercentLabel, 1, 0);
 			this.jobTable.Controls.Add(this.tableJobTitleLabel, 0, 0);
@@ -154,7 +152,7 @@ namespace Video_Downloader
 			this.jobTable.RowCount = 2;
 			this.jobTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
 			this.jobTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-			this.jobTable.Size = new System.Drawing.Size(622, 506);
+			this.jobTable.Size = new System.Drawing.Size(625, 506);
 			this.jobTable.TabIndex = 2;
 			// 
 			// tableJobProgressLabel
@@ -210,7 +208,7 @@ namespace Video_Downloader
 			this.forceCloseJobTableLabel.Location = new System.Drawing.Point(560, 0);
 			this.forceCloseJobTableLabel.Margin = new System.Windows.Forms.Padding(0);
 			this.forceCloseJobTableLabel.Name = "forceCloseJobTableLabel";
-			this.forceCloseJobTableLabel.Size = new System.Drawing.Size(62, 32);
+			this.forceCloseJobTableLabel.Size = new System.Drawing.Size(65, 32);
 			this.forceCloseJobTableLabel.TabIndex = 3;
 			this.forceCloseJobTableLabel.Text = "Close";
 			this.forceCloseJobTableLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -219,13 +217,12 @@ namespace Video_Downloader
 			// 
 			this.searchPanel.Controls.Add(this.linkButton);
 			this.searchPanel.Controls.Add(this.linkTextBox);
-			this.searchPanel.Controls.Add(this.formatDownloadComboBox);
 			this.searchPanel.Dock = System.Windows.Forms.DockStyle.Top;
 			this.searchPanel.Location = new System.Drawing.Point(0, 0);
 			this.searchPanel.Margin = new System.Windows.Forms.Padding(0);
 			this.searchPanel.MinimumSize = new System.Drawing.Size(0, 24);
 			this.searchPanel.Name = "searchPanel";
-			this.searchPanel.Size = new System.Drawing.Size(622, 27);
+			this.searchPanel.Size = new System.Drawing.Size(625, 27);
 			this.searchPanel.TabIndex = 1;
 			// 
 			// linkButton
@@ -236,7 +233,7 @@ namespace Video_Downloader
 			this.linkButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.linkButton.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
 			this.linkButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(230)))), ((int)(((byte)(233)))));
-			this.linkButton.Location = new System.Drawing.Point(547, 0);
+			this.linkButton.Location = new System.Drawing.Point(550, 0);
 			this.linkButton.Name = "linkButton";
 			this.linkButton.Size = new System.Drawing.Size(75, 27);
 			this.linkButton.TabIndex = 1;
@@ -254,15 +251,8 @@ namespace Video_Downloader
 			this.linkTextBox.Location = new System.Drawing.Point(0, 0);
 			this.linkTextBox.MinimumSize = new System.Drawing.Size(480, 24);
 			this.linkTextBox.Name = "linkTextBox";
-			this.linkTextBox.Size = new System.Drawing.Size(480, 26);
+			this.linkTextBox.Size = new System.Drawing.Size(541, 26);
 			this.linkTextBox.TabIndex = 0;
-			// 
-			// formatDownloadComboBox
-			// 
-			this.formatDownloadComboBox.Location = new System.Drawing.Point(0, 0);
-			this.formatDownloadComboBox.Name = "formatDownloadComboBox";
-			this.formatDownloadComboBox.Size = new System.Drawing.Size(121, 11);
-			this.formatDownloadComboBox.TabIndex = 2;
 			// 
 			// settingsTab
 			// 
@@ -545,32 +535,16 @@ namespace Video_Downloader
 			this.icon.TabIndex = 0;
 			this.icon.TabStop = false;
 			// 
-			// titleLable
-			// 
-			this.titleLable.BackColor = System.Drawing.Color.Transparent;
-			this.titleLable.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.titleLable.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-			this.titleLable.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(52)))), ((int)(((byte)(54)))));
-			this.titleLable.Location = new System.Drawing.Point(0, 0);
-			this.titleLable.Name = "titleLable";
-			this.titleLable.Padding = new System.Windows.Forms.Padding(5);
-			this.titleLable.Size = new System.Drawing.Size(624, 38);
-			this.titleLable.TabIndex = 1;
-			this.titleLable.Text = "Simple Downloader";
-			this.titleLable.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			this.titleLable.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MainForm_MouseDown);
-			// 
 			// titlebarPanel
 			// 
 			this.titlebarPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(99)))), ((int)(((byte)(110)))), ((int)(((byte)(114)))));
 			this.titlebarPanel.Controls.Add(this.minimizeButton);
-			this.titlebarPanel.Controls.Add(this.titleLable);
 			this.titlebarPanel.Controls.Add(this.closeAppButton);
 			this.titlebarPanel.Dock = System.Windows.Forms.DockStyle.Top;
 			this.titlebarPanel.Location = new System.Drawing.Point(150, 0);
 			this.titlebarPanel.MinimumSize = new System.Drawing.Size(0, 38);
 			this.titlebarPanel.Name = "titlebarPanel";
-			this.titlebarPanel.Size = new System.Drawing.Size(650, 38);
+			this.titlebarPanel.Size = new System.Drawing.Size(653, 38);
 			this.titlebarPanel.TabIndex = 1;
 			this.titlebarPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MainForm_MouseDown);
 			// 
@@ -581,7 +555,7 @@ namespace Video_Downloader
 			this.minimizeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.minimizeButton.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
 			this.minimizeButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(52)))), ((int)(((byte)(54)))));
-			this.minimizeButton.Location = new System.Drawing.Point(598, 0);
+			this.minimizeButton.Location = new System.Drawing.Point(601, 0);
 			this.minimizeButton.Name = "minimizeButton";
 			this.minimizeButton.Size = new System.Drawing.Size(26, 38);
 			this.minimizeButton.TabIndex = 2;
@@ -596,7 +570,7 @@ namespace Video_Downloader
 			this.closeAppButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.closeAppButton.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
 			this.closeAppButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(52)))), ((int)(((byte)(54)))));
-			this.closeAppButton.Location = new System.Drawing.Point(624, 0);
+			this.closeAppButton.Location = new System.Drawing.Point(627, 0);
 			this.closeAppButton.Name = "closeAppButton";
 			this.closeAppButton.Size = new System.Drawing.Size(26, 38);
 			this.closeAppButton.TabIndex = 0;
@@ -612,7 +586,7 @@ namespace Video_Downloader
 			this.contentPanel.Location = new System.Drawing.Point(150, 38);
 			this.contentPanel.Margin = new System.Windows.Forms.Padding(20);
 			this.contentPanel.Name = "contentPanel";
-			this.contentPanel.Size = new System.Drawing.Size(650, 562);
+			this.contentPanel.Size = new System.Drawing.Size(653, 562);
 			this.contentPanel.TabIndex = 2;
 			// 
 			// MainForm
@@ -663,7 +637,6 @@ namespace Video_Downloader
 		private System.Windows.Forms.Panel leftMenuPanel;
 		private System.Windows.Forms.Panel iconTitlePanel;
 		private System.Windows.Forms.PictureBox icon;
-		private System.Windows.Forms.Label titleLable;
 		private System.Windows.Forms.Panel buttonContainer;
 		private System.Windows.Forms.Panel panelNav;
 		private System.Windows.Forms.Button settingsButton;
@@ -695,7 +668,6 @@ namespace Video_Downloader
 		private System.Windows.Forms.Label tableJobPercentLabel;
 		private System.Windows.Forms.Label tableJobTitleLabel;
 		private System.Windows.Forms.Label forceCloseJobTableLabel;
-		private System.Windows.Forms.ComboBox formatDownloadComboBox;
 		private System.Windows.Forms.Label downloadLocationLabel;
 		private System.Windows.Forms.Label otherSettingsLabel;
 		private System.Windows.Forms.Button downloadButton;

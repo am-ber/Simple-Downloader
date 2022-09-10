@@ -17,13 +17,12 @@ namespace Video_Downloader
 		private Settings settings;
 		private TabPage previousPage;
 		private List<Agent> agents;
-		private StringBuilder convertExtensionFilterBuilder;
 		#region FormInitializing
 		public const int WM_NCLBUTTONDOWN = 0xA1;
 		public const int HT_CAPTION = 0x2;
-		[System.Runtime.InteropServices.DllImport("user32.dll")]
+		[DllImport("user32.dll")]
 		public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
-		[System.Runtime.InteropServices.DllImport("user32.dll")]
+		[DllImport("user32.dll")]
 		public static extern bool ReleaseCapture();
 		[DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
 		private static extern IntPtr CreateRoundRectRgn(
@@ -35,7 +34,6 @@ namespace Video_Downloader
 			this.settings = settings;
 			agents = new List<Agent>();
 			InitializeComponent();
-			InitConvertFilterBuilder();
 			Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 0, 0));
 		}
 		private void MainForm_Load(object sender, EventArgs e)
@@ -46,24 +44,9 @@ namespace Video_Downloader
 		}
 		private void InitFormControllers()
 		{
-			formatDownloadComboBox.Items.Add(".mp3");
-			formatDownloadComboBox.Text = settings.LastExtension;
 			downloadLocationTextBox.Text = settings.DownloadLocation;
 			linkTextBox.Text = settings.LastVideoDownloaded;
 			loggingCheckBox.Checked = settings.LogThings;
-		}
-		private void InitConvertFilterBuilder()
-		{
-			convertExtensionFilterBuilder = new StringBuilder("Video Files|");
-			foreach (string extension in FileExtensions.VideoFormats)
-			{
-				convertExtensionFilterBuilder.Append($"*{extension};");
-			}
-			convertExtensionFilterBuilder.Append("|Audio Files|");
-			foreach (string extension in FileExtensions.AudioFormats)
-			{
-				convertExtensionFilterBuilder.Append($"*{extension};");
-			}
 		}
 		#endregion
 
@@ -194,7 +177,6 @@ namespace Video_Downloader
 		{
 			Program.Log("Updating settings file.");
 			settings.LastVideoDownloaded = linkTextBox.Text;
-			settings.LastExtension = formatDownloadComboBox.Text;
 			File.WriteAllText("config.json", JsonConvert.SerializeObject(settings));
 		}
 		private void PanelDecider(Button activator)
@@ -240,15 +222,7 @@ namespace Video_Downloader
 			}
 
 			YouTubeVideo maxBitrate = videos.First(i => i.AudioBitrate == videos.Max(j => j.AudioBitrate));
-			switch (formatDownloadComboBox.Text)
-			{
-				case (FileExtensions.mp4):
-					AddJobRow(new Agent(maxQualityVideo, settings), jobTable);
-					break;
-				case (FileExtensions.mp3):
-					AddJobRow(new Agent(maxBitrate, settings, true), jobTable);
-					break;
-			}
+			AddJobRow(new Agent(maxBitrate, settings, true), jobTable);
 		}
 		private void AddJobRow(Agent agent, TableLayoutPanel panel)
 		{

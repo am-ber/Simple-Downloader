@@ -22,13 +22,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="ILMerge" Version="3.0.41" />
+    <PackageReference Include="ilmerge" Version="3.0.41" />
+    <PackageReference Include="VideoLibrary" Version="3.2.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="libvideo">
-      <HintPath>lib\libvideo.dll</HintPath>
-    </Reference>
     <Reference Include="MediaToolkit">
       <HintPath>lib\MediaToolkit.dll</HintPath>
     </Reference>
@@ -55,13 +53,6 @@
   </ItemGroup>
 <Target Name="ILMerge">
 	<!-- the ILMergePath property points to the location of ILMerge.exe console application -->
-	<Exec Command="$(ILMergeConsolePath) bin\Debug\net5.0-windows\Video-Downloader.exe ^
-	  /out:bin\Debug\net5.0-windows\Downloader.dll ^
-bin\Debug\net5.0-windows\Video-Downloader.dll ^
-bin\Debug\net5.0-windows\MediaToolkit.dll ^
-bin\Debug\net5.0-windows\Newtonsoft.Json.dll ^
-bin\Debug\net5.0-windows\Video-Downloader.runtimeconfig.dev.json ^
-bin\Debug\net5.0-windows\Video-Downloader.runtimeconfig.json ^
-bin\Debug\net5.0-windows\Video-Downloader.deps.json" />
+	<Exec Command="$(ILMergeConsolePath) bin\Debug\net5.0-windows\Video-Downloader.exe ^&#xD;&#xA;	  /out:bin\Debug\net5.0-windows\Downloader.dll ^&#xD;&#xA;bin\Debug\net5.0-windows\Video-Downloader.dll ^&#xD;&#xA;bin\Debug\net5.0-windows\MediaToolkit.dll ^&#xD;&#xA;bin\Debug\net5.0-windows\Newtonsoft.Json.dll ^&#xD;&#xA;bin\Debug\net5.0-windows\Video-Downloader.runtimeconfig.dev.json ^&#xD;&#xA;bin\Debug\net5.0-windows\Video-Downloader.runtimeconfig.json ^&#xD;&#xA;bin\Debug\net5.0-windows\Video-Downloader.deps.json" />
 </Target>
 </Project>

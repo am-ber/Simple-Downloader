@@ -36,7 +36,6 @@ namespace Video_Downloader
 				// It probably means we just need to make a new log file
 				settings.LogThings = true;
 				settings.DownloadLocation = KnownFolders.GetPath(KnownFolder.Downloads);
-				settings.LastExtension = FileExtensions.mp4;
 				settings.LastVideoDownloaded = @"https://youtu.be/dQw4w9WgXcQ";
 				// Make the file
 				File.WriteAllText("config.json", JsonConvert.SerializeObject(settings));

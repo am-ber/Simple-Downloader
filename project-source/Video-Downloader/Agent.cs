@@ -5,8 +5,6 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using MediaToolkit;
-using MediaToolkit.Model;
 using VideoLibrary;
 
 namespace Video_Downloader
@@ -18,7 +16,6 @@ namespace Video_Downloader
 		private Settings settings;
 		private RunAfterFinished runnable;
 		private bool forceStop;
-		private FileExtensions extension;
 		// Public vars
 		public string fileLocation;
 		public bool finished = false;
@@ -42,11 +39,6 @@ namespace Video_Downloader
 				if (thing.GetType().IsEquivalentTo(typeof(Settings)))
 				{
 					settings = thing as Settings;
-					continue;
-				}
-				if (thing.GetType().IsEquivalentTo(typeof(FileExtensions)))
-				{
-					extension = (FileExtensions) thing;
 					continue;
 				}
 				if (thing.GetType().IsEquivalentTo(typeof(string)))

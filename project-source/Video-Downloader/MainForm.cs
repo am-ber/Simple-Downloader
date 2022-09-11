@@ -39,7 +39,6 @@ namespace Video_Downloader
 		private void MainForm_Load(object sender, EventArgs e)
 		{
 			ContentPanelHandler(downloadTab);
-			NavButtonActive(downloadButton);
 			InitFormControllers();
 		}
 		private void InitFormControllers()
@@ -47,33 +46,18 @@ namespace Video_Downloader
 			downloadLocationTextBox.Text = settings.DownloadLocation;
 			linkTextBox.Text = settings.LastVideoDownloaded;
 			loggingCheckBox.Checked = settings.LogThings;
+			versionLabel.Text = "v" + Program.version;
 		}
 		#endregion
 
 		#region ButtonRegion
-		private void NavButtonActive(Button btn)
-		{
-			if (activeNavButton != null)
-				NavButtonDeactivate(activeNavButton);
-
-			panelNav.Height = btn.Height;
-			panelNav.Top = btn.Top;
-			panelNav.Left = btn.Left;
-			btn.BackColor = Color.FromArgb(99, 110, 114);
-			activeNavButton = btn;
-			PanelDecider(btn);
-		}
-		private void NavButtonDeactivate(Button btn)
-		{
-			btn.BackColor = Color.Transparent;
-		}
 		private void NavButtonClick(object sender, EventArgs e)
 		{
 			Program.Log($"\t{sender} Button pressed");
 			if (sender.GetType().IsEquivalentTo(typeof(Button)))
 			{
 				Button btn = sender as Button;
-				NavButtonActive(btn);
+				PanelDecider(btn);
 			}
 		}
 		private void linkButton_Click(object sender, EventArgs e)

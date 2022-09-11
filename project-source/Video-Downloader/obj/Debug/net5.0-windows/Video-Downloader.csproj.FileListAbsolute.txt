@@ -38,7 +38,6 @@ E:\Documents\GitHub\Simple-Downloader\project-source\Video-Downloader\obj\Debug\
 E:\Documents\GitHub\Simple-Downloader\project-source\Video-Downloader\obj\Debug\net5.0-windows\Video-Downloader.pdb
 E:\Documents\GitHub\Simple-Downloader\project-source\Video-Downloader\obj\Debug\net5.0-windows\Video-Downloader.genruntimeconfig.cache
 E:\Documents\GitHub\Simple-Downloader\project-source\Video-Downloader\bin\Debug\net5.0-windows\libvideo.dll
-E:\Documents\GitHub\Simple-Downloader\project-source\Video-Downloader\bin\Debug\net5.0-windows\MediaToolkit.dll
 E:\Documents\GitHub\Simple-Downloader\project-source\Video-Downloader\bin\Debug\net5.0-windows\Newtonsoft.Json.dll
 E:\Documents\GitHub\Simple-Downloader\project-source\Video-Downloader\obj\Debug\net5.0-windows\Video-Downloader.csproj.CopyComplete
 E:\Documents\GitHub\Simple-Downloader\project-source\Video-Downloader\obj\Debug\net5.0-windows\Video-Downloader.csproj.AssemblyReference.cache

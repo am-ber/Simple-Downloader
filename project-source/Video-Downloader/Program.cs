@@ -8,6 +8,7 @@ namespace Video_Downloader
 {
 	static class Program
 	{
+		public const float version = 0.2f;
 		private static StreamWriter currentLogFile;
 		[STAThread]
 		static void Main()
